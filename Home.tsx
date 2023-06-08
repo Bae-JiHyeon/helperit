@@ -1,40 +1,43 @@
 import React from 'react';
-import {View, Image, StyleSheet, StatusBar} from 'react-native';
-import {NativeBaseProvider} from 'native-base';
-import {AppBar} from '@react-native-material/core';
+import {StatusBar} from 'react-native';
+import {Container, NativeBaseProvider, HStack, Image} from 'native-base';
 
-import TabNavigator from './Navigation/TabNavigator';
+//상단에 위치할 AppBar > 로고와 돋보기 버튼, 지도 버튼 들어갈 예정//
+function AppBar() {
+  return (
+    <>
+      <StatusBar backgroundColor="#34BEBA" hidden={true} />
+      <HStack
+        bg="#34BEBA"
+        px="1"
+        py="3"
+        justifyContent="space-between"
+        alignItems="center"
+        width={'100%'}
+        h={60}>
+        <HStack alignItems="center" marginTop={3}>
+          <Image
+            source={require('./Assets/helperItLogo.png')}
+            alt="helperItLogo"
+            size="md"
+            resizeMode="contain"
+            marginLeft={7}
+          />
+        </HStack>
+        <HStack />
+      </HStack>
+    </>
+  );
+}
 
 const Home = () => {
   return (
     <NativeBaseProvider>
-      <View style={{flex: 1}}>
-        <AppBar
-          style={{
-            flexDirection: 'row',
-            flex: 0.1,
-            width: '100%',
-            paddingTop: StatusBar.currentHeight,
-            backgroundColor: '#34BEBA',
-            justifyContent: 'flex-start',
-          }}>
-          <Image
-            style={style.logo}
-            source={require('./src/assets/helperItLogo.png')}
-          />
-        </AppBar>
-        <TabNavigator />
-      </View>
+      <Container>
+        <AppBar />
+      </Container>
     </NativeBaseProvider>
   );
 };
-
-const style = StyleSheet.create({
-  logo: {
-    width: 80,
-    height: 80,
-    resizeMode: 'contain',
-  },
-});
 
 export default Home;
