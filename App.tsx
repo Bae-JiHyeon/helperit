@@ -1,9 +1,8 @@
 import React from 'react';
-import NativeBase1 from './NativeBase1';
-import Login from './Login';
+import Home from './Home';
 
 const App = () => {
-  return <Login />;
+  return <Home />;
 };
 
 export default App;

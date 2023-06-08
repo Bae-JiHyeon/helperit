@@ -13,8 +13,7 @@ function AppBar() {
         py="3"
         justifyContent="space-between"
         alignItems="center"
-        w={'100%'}
-        maxW={'100%'}
+        width={'100%'}
         h={60}>
         <HStack alignItems="center" marginTop={3}>
           <Image
@@ -31,7 +30,7 @@ function AppBar() {
   );
 }
 
-const NativeBase1 = () => {
+const Home = () => {
   return (
     <NativeBaseProvider>
       <Container>
@@ -41,4 +40,4 @@ const NativeBase1 = () => {
   );
 };
 
-export default NativeBase1;
+export default Home;
