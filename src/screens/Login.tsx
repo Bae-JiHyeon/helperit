@@ -4,13 +4,24 @@ import {
   Text,
   TextInput,
   Dimensions,
-  ImageBackground,
   TouchableOpacity,
-  SafeAreaView, ScrollView
-} from "react-native";
-import React, { useState } from "react";
+  SafeAreaView,
+  ScrollView,
+  Button,
+  Pressable
+} from 'react-native';
+import{ useState } from 'react';
+import Register from "./Register";
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MainStackParamList } from "../types/navigation";
+  const Login = ({navigation}:NativeStackScreenProps<MainStackParamList>) => {
 
-const Login = () => {
+    const [userID, setUserID] = useState('');
+    const [password, setPassword] = useState('');
+
+  const onSignInPressed = () => {
+      console.warn("onSignInPressed");
+    };
   return(
     <ScrollView style={styles.container}>
       <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
@@ -20,7 +31,11 @@ const Login = () => {
               style={styles.input}
               placeholder="아이디 입력"
               maxLength={15}
-              keyboardType="email-address"/>
+              autoCapitalize="none"
+              value={userID}
+              onChangeText={val =>setUserID(val)}
+              keyboardType="email-address"
+              />
           </View>
 
           <View style={styles.inputContainer}>
@@ -28,24 +43,35 @@ const Login = () => {
               style={styles.input}
               placeholder="비밀번호 입력"
               maxLength={21}
+              autoCapitalize="none"
+              autoComplete="off"
+              value={password}
+              onChangeText={val => setPassword(val)}
+              secureTextEntry
               keyboardType="email-address"/>
           </View>
         </View>
       </View>
 
-
-      <TouchableOpacity style={styles.buttonLogin}>
-         <Text style={styles.buttonText}>로그인</Text>
-      </TouchableOpacity>
+      <View style={styles.otherButtonContainer}>
+        <Pressable onPress={onSignInPressed} style={styles.buttonLogin}>
+          <Text>로그인</Text>
+        </Pressable>
+      </View>
 
       <View style={styles.otherButtonContainer}>
-        <TouchableOpacity style={styles.otherButton}>
+        <Pressable
+          onPress={onSignInPressed}
+          style={styles.otherButton}>
           <Text style={styles.otherText}>비밀번호 찾기</Text>
-        </TouchableOpacity>
-        <Text style={styles.otherText}>   |   </Text>
-        <TouchableOpacity style={styles.otherButton}>
+        </Pressable>
+          <Text style={styles.otherText}>   |   </Text>
+        <Pressable
+          style={styles.otherButton}
+          onPress={() => navigation.navigate('Register')}
+          >
           <Text style={styles.otherText}>회원가입</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </ScrollView>
   )
@@ -108,7 +134,8 @@ const styles = StyleSheet.create({
   otherButtonContainer:{
     justifyContent: 'center',
     flexDirection: 'row',
-
+    display: 'flex',
+    marginTop: 15
   }
 })
 export default Login;
