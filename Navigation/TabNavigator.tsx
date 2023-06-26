@@ -1,0 +1,16 @@
+import React from 'react';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import WorkRequest from '../UserMode_Screens/WorkRequest';
+import HelperMode from '../UserMode_Screens/HelperMode';
+
+const Tab = createMaterialTopTabNavigator();
+const TabNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen component={WorkRequest} name="WorkRequest" />
+      <Tab.Screen component={HelperMode} name="HelperMode" />
+    </Tab.Navigator>
+  );
+};
+
+export default TabNavigator;

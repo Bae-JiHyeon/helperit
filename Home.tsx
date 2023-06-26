@@ -1,43 +1,52 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {Container, NativeBaseProvider, HStack, Image} from 'native-base';
+import {View, Image, StyleSheet, StatusBar} from 'react-native';
+import {NativeBaseProvider} from 'native-base';
+import {AppBar} from '@react-native-material/core';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
 
-//상단에 위치할 AppBar > 로고와 돋보기 버튼, 지도 버튼 들어갈 예정//
-function AppBar() {
-  return (
-    <>
-      <StatusBar backgroundColor="#34BEBA" hidden={true} />
-      <HStack
-        bg="#34BEBA"
-        px="1"
-        py="3"
-        justifyContent="space-between"
-        alignItems="center"
-        width={'100%'}
-        h={60}>
-        <HStack alignItems="center" marginTop={3}>
-          <Image
-            source={require('./Assets/helperItLogo.png')}
-            alt="helperItLogo"
-            size="md"
-            resizeMode="contain"
-            marginLeft={7}
-          />
-        </HStack>
-        <HStack />
-      </HStack>
-    </>
-  );
-}
+import TabNavigator from './Navigation/TabNavigator';
 
-const Home = () => {
+const App = () => {
   return (
     <NativeBaseProvider>
-      <Container>
-        <AppBar />
-      </Container>
+      <View style={{flex: 1}}>
+        <AppBar
+          style={{
+            flexDirection: 'row',
+            flex: 0.1,
+            width: '100%',
+            paddingTop: StatusBar.currentHeight,
+            backgroundColor: '#34BEBA',
+            justifyContent: 'flex-start',
+          }}>
+          <Image
+            style={style.logo}
+            source={require('./Assets/helperItLogo.png')}
+          />
+        </AppBar>
+        <NavigationContainer>
+          <TabNavigator />
+        </NavigationContainer>
+      </View>
     </NativeBaseProvider>
   );
 };
 
-export default Home;
+const style = StyleSheet.create({
+  logo: {
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
+  },
+});
+
+const AppProvider = () => {
+  return (
+    <SafeAreaProvider>
+      <App />
+    </SafeAreaProvider>
+  );
+};
+
+export default AppProvider;
