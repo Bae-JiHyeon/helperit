@@ -4,11 +4,12 @@ import WorkRequest from '../UserMode_Screens/WorkRequest';
 import HelperMode from '../UserMode_Screens/HelperMode';
 
 const Tab = createMaterialTopTabNavigator();
+
 const TabNavigator = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen component={WorkRequest} name="WorkRequest" />
-      <Tab.Screen component={HelperMode} name="HelperMode" />
+      <Tab.Screen component={WorkRequest} name="일거리 요청" />
+      <Tab.Screen component={HelperMode} name="헬퍼 모드" />
     </Tab.Navigator>
   );
 };
