@@ -11,9 +11,11 @@ import {
     Pressable
 } from 'react-native';
 import{ useState } from 'react';
-import Register from "./Register";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MainStackParamList } from "../types/navigation";
+import { MainStackParamList } from "../../types/navigation";
+
+import Register from "./Register";
+import Terms from "./Terms";
 const Login = ({navigation}:NativeStackScreenProps<MainStackParamList>) => {
 
     const [userID, setUserID] = useState('');

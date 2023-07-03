@@ -11,22 +11,31 @@ import {
   View,
   ViewStyle
 } from "react-native";
-import Login from './src/screens/Login';
-import Register from './src/screens/Register';
-import HelperHome from "./src/screens/HelperMode/HelperHome";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
-import { MainStackParamList } from "./src/types/navigation";
 
-const Stack = createStackNavigator<MainStackParamList>()
+import Login from './src/screens/LoginForm/Login';
+import Terms from "./src/screens/LoginForm/Terms"
+import HelperHome from "./src/screens/HelperMode/HelperHome";
+
+export enum LoginScreens {
+  Login = 'Login',
+  Register = 'Register',
+}
+export type LoginStackParamList = {
+  Login: undefined;
+  Register: undefined;
+};
+
+const Stack = createStackNavigator<LoginStackParamList>()
 const App = () => {
-  return <HelperHome/>
+  return <Terms/>
 };
 //(
    // <NavigationContainer>
    //   <Stack.Navigator>
-   //     <Stack.Screen name='Login' component = {Login}/>
-   //     <Stack.Screen name='Register' component={Register}/>
+   //     <Stack.Screen name='Login' component = {LoginScreens.Login}/>
+   //     <Stack.Screen name='Register' component={LoginScreens.Register}/>
    //   </Stack.Navigator>
    // </NavigationContainer>
 //);
