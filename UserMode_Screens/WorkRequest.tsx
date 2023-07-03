@@ -70,7 +70,6 @@ const WorkRequest = () => {
             })}
           </View>
         </View>
-
         <View
           style={{
             alignItems: 'center',
