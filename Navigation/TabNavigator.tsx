@@ -7,7 +7,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator swipeEnabled = {false}>
       <Tab.Screen component={WorkRequest} name="일거리 요청" />
       <Tab.Screen component={HelperMode} name="헬퍼 모드" />
     </Tab.Navigator>

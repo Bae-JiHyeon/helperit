@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   Text,
   StyleSheet,
@@ -18,7 +17,6 @@ const WorkRequest = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const {width: windowWidth} = useWindowDimensions();
   return (
-    <SafeAreaView style={styles.container}>
       <ScrollView style={{flex: 1}}>
         <View style={styles.scrollContainer}>
           <ScrollView
@@ -100,7 +98,6 @@ const WorkRequest = () => {
         </View>
         <Divider thickness="10" />
       </ScrollView>
-    </SafeAreaView>
   );
 };
 
