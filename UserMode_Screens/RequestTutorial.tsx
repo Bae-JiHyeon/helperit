@@ -1,4 +1,4 @@
-//체크박스 구현하기
+//체크박스 구현하기 - Invariant Violation: requireNativeComponent: "RNSVGPath" was not found in the UIManager. 에러 뜨는중
 //홈화면의 일거리 요청 버튼과 스택 네비게이터로 연결하기
 
 import React from 'react';
@@ -69,7 +69,11 @@ const RequestTutorial = () => {
             </VStack>
           </Box>
         </VStack>
-        <HStack justifyContent={'center'} paddingTop={5}>
+        <HStack justifyContent={'center'} paddingTop={5} space={3}>
+          <Checkbox
+            value="test"
+            accessibilityLabel="This is a dummy checkbox"
+          />
           <Text fontSize="2xl">다시 보지 않기</Text>
         </HStack>
       </ScrollView>
