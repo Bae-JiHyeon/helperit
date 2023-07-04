@@ -12,28 +12,28 @@ const data = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     fullName: 'Aafreen Khan',
-    timeStamp: '12:47 PM',
+    timeStamp: '',
     recentText: 'Good Day!',
     avatarUrl: '',
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
     fullName: 'Sujitha Mathur',
-    timeStamp: '11:11 PM',
+    timeStamp: '',
     recentText: 'Cheer up, there!',
     avatarUrl: '',
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
     fullName: 'Anci Barroco',
-    timeStamp: '6:22 PM',
+    timeStamp: '',
     recentText: 'Good Day!',
     avatarUrl: '',
   },
   {
     id: '68694a0f-3da1-431f-bd56-142371e29d72',
     fullName: 'Aniket Kumar',
-    timeStamp: '8:56 PM',
+    timeStamp: '',
     recentText: 'All the best',
     avatarUrl: '',
   },
@@ -42,9 +42,15 @@ const data = [
 const Home_FindTalent = () => {
   return (
     <Box>
-      <Heading fontSize="xl" p="4" pb="3">
-        Inbox
-      </Heading>
+      <HStack>
+        <Heading fontSize="xl" p="4" pb="3">
+          헬퍼 재능 찾기
+        </Heading>
+        <Spacer />
+        <Box paddingRight={7} justifyContent={'center'}>
+          <Text>전체보기 {'>'}</Text>
+        </Box>
+      </HStack>
       <FlatList
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         data={data}
@@ -56,7 +62,13 @@ const Home_FindTalent = () => {
             pr={['0', '5']}
             py="2">
             <HStack space={[2, 3]} justifyContent="space-between">
-              <Avatar rounded={10} size="48px" source={{uri: item.avatarUrl}} />
+              <Box paddingLeft={5}>
+                <Avatar
+                  rounded={10}
+                  size="48px"
+                  source={{uri: item.avatarUrl}}
+                />
+              </Box>
               <VStack>
                 <Text _dark={{color: 'warmGray.50'}} color="coolGray.800" bold>
                   {item.fullName}

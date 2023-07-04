@@ -1,3 +1,6 @@
+//Bottom Tab Navigator 달아야함.
+//각 버튼별로 Stack Navigator 화면전환 구현 필요함
+
 import React, {useRef} from 'react';
 import {
   ScrollView,
@@ -7,7 +10,7 @@ import {
   Animated,
   useWindowDimensions,
 } from 'react-native';
-import {Center, Circle, VStack, Divider, HStack} from 'native-base';
+import {Center, Circle, VStack, Divider, HStack, Button} from 'native-base';
 import Home_FindTalent from './Home_FindTalent';
 import Home_RequestRealTime from './Home_RequestRealTime';
 import Home_Suggestions from './Home_Suggestions';
@@ -16,7 +19,7 @@ const images = new Array(4).fill(
   '/Users/kimtaeho/Desktop/4-1/major-experiment/helperIt/helperIt/Assets/helperItLogo.png',
 );
 
-const WorkRequest = () => {
+const WorkRequestTab = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const {width: windowWidth} = useWindowDimensions();
   return (
@@ -79,22 +82,28 @@ const WorkRequest = () => {
           flex: 0.3,
           justifyContent: 'center',
         }}>
-        <VStack space={1}>
-          <HStack space={4}>
-            <Circle size="55px" bg="gray.300"></Circle>
-            <Circle size="55px" bg="gray.300"></Circle>
-            <Circle size="55px" bg="gray.300"></Circle>
-            <Circle size="55px" bg="gray.300"></Circle>
-            <Circle size="55px" bg="gray.300"></Circle>
-          </HStack>
-          <HStack paddingLeft={1} space={7}>
+        <HStack space={3}>
+          <VStack space={2}>
+            <Button rounded={100} w={60} h={60}></Button>
             <Text style={{textAlign: 'center'}}>일거리{'\n'}요청</Text>
+          </VStack>
+          <VStack space={2}>
+            <Button rounded={100} w={60} h={60}></Button>
             <Text style={{textAlign: 'center'}}>분리수거{'\n'}배출</Text>
+          </VStack>
+          <VStack space={2}>
+            <Button rounded={100} w={60} h={60}></Button>
             <Text style={{textAlign: 'center'}}>헬퍼재능{'\n'}찾기</Text>
+          </VStack>
+          <VStack space={2}>
+            <Button rounded={100} w={60} h={60}></Button>
             <Text style={{textAlign: 'center'}}>가정집{'\n'}청소</Text>
+          </VStack>
+          <VStack space={2}>
+            <Button rounded={100} w={60} h={60}></Button>
             <Text style={{textAlign: 'center'}}>헬퍼에게{'\n'}견적보내기</Text>
-          </HStack>
-        </VStack>
+          </VStack>
+        </HStack>
       </View>
       <Divider thickness="10" />
       <Home_FindTalent />
@@ -113,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   scrollContainer: {
-    height: '15%',
+    height: '11%',
     alignItems: 'center',
     justifyContent: 'center',
     resizeMode: 'contain',
@@ -133,7 +142,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WorkRequest;
+export default WorkRequestTab;
 
 /*캐러셀 안에 들어갈 이미지 넣는 코드
 <ImageBackground
