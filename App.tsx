@@ -7,7 +7,7 @@ import RequestPage from './UserMode_Screens/RequestPage';
 const App = () => {
   return (
     <SafeAreaProvider>
-      <RequestTutorial />
+      <RequestPage />
     </SafeAreaProvider>
   );
 };
