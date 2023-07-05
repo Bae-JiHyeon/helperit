@@ -8,9 +8,13 @@ import React, {useState} from 'react';
 import {
   Box,
   Button,
+  FormControl,
   Heading,
+  HStack,
   Input,
+  Modal,
   NativeBaseProvider,
+  Spacer,
   Text,
   TextArea,
   VStack,
@@ -20,6 +24,12 @@ import {ScrollView, TextInput} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 const RequestPage = () => {
+  const openModal = placement => {
+    setOpen(true);
+    setPlacement(placement);
+  };
+  const [placement, setPlacement] = useState(undefined);
+  const [open, setOpen] = useState(false);
   const [selected, setSelected] = React.useState('');
 
   const data_categories = [
@@ -78,49 +88,6 @@ const RequestPage = () => {
               autoCompleteType="off"></TextArea>
             <Heading>수행지</Heading>
             <GooglePlacesAutocomplete
-              styles={{
-                container: {
-                  flex: 1,
-                },
-                textInputContainer: {
-                  flexDirection: 'row',
-                },
-                textInput: {
-                  backgroundColor: '#FFFFFF',
-                  height: 44,
-                  borderRadius: 5,
-                  paddingVertical: 5,
-                  paddingHorizontal: 10,
-                  fontSize: 15,
-                  flex: 1,
-                },
-                poweredContainer: {
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
-                  borderBottomRightRadius: 5,
-                  borderBottomLeftRadius: 5,
-                  borderColor: '#c8c7cc',
-                  borderTopWidth: 0.5,
-                },
-                powered: {},
-                listView: {},
-                row: {
-                  backgroundColor: '#FFFFFF',
-                  padding: 13,
-                  height: 44,
-                  flexDirection: 'row',
-                },
-                separator: {
-                  height: 0.5,
-                  backgroundColor: '#c8c7cc',
-                },
-                description: {},
-                loader: {
-                  flexDirection: 'row',
-                  justifyContent: 'flex-end',
-                  height: 20,
-                },
-              }}
               placeholder="수행지를 입력하세요."
               onPress={(data, details = null) => {
                 // 'details' is provided when fetchDetails = true
@@ -157,7 +124,7 @@ const RequestPage = () => {
             <Text fontSize={'xs'} paddingLeft={5}>
               매칭 수수료 1,400원{'\n'}총 일거리 비용 11,400원
             </Text>
-            <Button>
+            <Button onPress={() => openModal('center')}>
               <Text bold color={'white'} fontSize={'xl'}>
                 일거리 요청하기
               </Text>
@@ -165,8 +132,56 @@ const RequestPage = () => {
           </VStack>
         </Box>
       </ScrollView>
+      <Modal isOpen={open} onClose={() => setOpen(false)} safeAreaTop={true}>
+        <Modal.Content maxWidth="350" {...styles[placement]}>
+          {/* <Modal.CloseButton /> */}
+          <Modal.Body>
+            <Heading fontSize={'md'} textAlign={'center'}>
+              입력하신 내용으로 일거리를{'\n'}등록하시겠습니까?
+            </Heading>
+            <Text>등록하신 이후 바로 매칭 시도가 시작됩니다.</Text>
+            <HStack paddingTop={5}>
+              <Button
+                variant="ghost"
+                colorScheme="blueGray"
+                onPress={() => {
+                  setOpen(false);
+                }}>
+                CANCEL
+              </Button>
+              <Spacer />
+              <Button
+                onPress={() => {
+                  setOpen(false);
+                }}>
+                OK
+              </Button>
+            </HStack>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
     </NativeBaseProvider>
   );
+};
+
+const styles = {
+  top: {
+    marginBottom: 'auto',
+    marginTop: 0,
+  },
+  bottom: {
+    marginBottom: 0,
+    marginTop: 'auto',
+  },
+  left: {
+    marginLeft: 0,
+    marginRight: 'auto',
+  },
+  right: {
+    marginLeft: 'auto',
+    marginRight: 0,
+  },
+  center: {},
 };
 
 export default RequestPage;
