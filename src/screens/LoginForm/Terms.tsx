@@ -3,9 +3,11 @@ import {View, Button, TextInput, Text, TouchableOpacity, StyleSheet, ScrollView,
 import {Checkbox, Container, TextArea, VStack} from "native-base";
 import { NativeBaseProvider } from 'native-base';
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import serviceTerms from "./term/ServiceTerms";
 
 
-import ServiceTerms from "./ServiceTerms";
+import ServiceTerms from "./term/ServiceTerms";
+import PrivacyTerms from "./term/PrivacyTerms";
 
 const Terms=()=>{
     const [isChecked, setIsChecked]=useState(false)
@@ -17,13 +19,28 @@ const Terms=()=>{
                     <Text style={styles.signInText}>회원가입</Text>
                     <Text style={styles.signInText}>약관에 동의해 주세요.</Text>
                 </View>
-                <ScrollView>
-                    <View style={{ flex: 1, padding: 20 }}>
-                        <Text>dwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwadwadawsawdwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</Text>
+                <View style={{ height: 150,  padding: 0, marginTop: '2%',}}>
+                    <Checkbox value="one" size="md">서비스 이용 약관 (필수)</Checkbox>
+                    <ScrollView>
+                        <ServiceTerms/>
+                    </ScrollView>
+                </View>
+                <View>
+                    <View style={{ height: 150,  padding:0, marginTop: '2%',}}>
+                        <Checkbox value="one" size="md">개인정보보호를 위한 이용자 동의 (필수)</Checkbox>
+                        <ScrollView>
+                            <PrivacyTerms/>
+                        </ScrollView>
                     </View>
-                </ScrollView>
-                <View style={styles.signInTextContainer}>
-
+                </View>
+                    <View style={{padding:0}}>
+                        <Checkbox value="one" size="md">마케팅 수신 정보 동의 (선택)</Checkbox>
+                    </View>
+                <View style={{marginTop: '10%',}}>
+                    <Checkbox value="one" size="md">전체 동의 하기</Checkbox>
+                </View>
+                <View style={{marginTop: '20%',}}>
+                    <Button title="확인"></Button>
                 </View>
             </View>
         </NativeBaseProvider>
@@ -32,7 +49,7 @@ const Terms=()=>{
 
 const styles = StyleSheet.create({
     signInTextContainer: {
-        flex:1,
+        height: 100,
         marginTop: '5%',
         marginLeft: '5%',
 

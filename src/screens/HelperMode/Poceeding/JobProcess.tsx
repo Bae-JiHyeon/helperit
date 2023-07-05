@@ -1,12 +1,20 @@
 import React from 'react'
-import { View, Text, StyleSheet } from "react-native";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
 
+import ProcessPressable from "../../../Components/ProcessPressable";
 function JobProcess(){
     return(
-        <View>
-            <Text>진행중</Text>
-        </View>
- )
+        <ScrollView>
+            <View style={{flex:1}}>
+                <ProcessPressable/>
+                <ProcessPressable/>
+                <ProcessPressable/>
+                <ProcessPressable/>
+                <ProcessPressable/>
+                <ProcessPressable/>
+            </View>
+        </ScrollView>
+ );
 }
 
 export default JobProcess;

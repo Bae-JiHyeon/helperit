@@ -17,6 +17,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from './src/screens/LoginForm/Login';
 import Terms from "./src/screens/LoginForm/Terms"
 import HelperHome from "./src/screens/HelperMode/HelperHome";
+import CustomerReview from "./src/screens/HelperMode/MyPageList/CustomerReview";
 
 export enum LoginScreens {
   Login = 'Login',
@@ -29,7 +30,7 @@ export type LoginStackParamList = {
 
 const Stack = createStackNavigator<LoginStackParamList>()
 const App = () => {
-  return <Terms/>
+  return <CustomerReview/>
 };
 //(
    // <NavigationContainer>
