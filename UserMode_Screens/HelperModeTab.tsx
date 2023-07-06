@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const HelperMode = () => {
+const HelperModeTab = () => {
   return (
     <View style={styles.container}>
       <Text>this is HelperMode.tsx</Text>
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default HelperMode;
+export default HelperModeTab;

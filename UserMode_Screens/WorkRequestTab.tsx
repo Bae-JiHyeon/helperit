@@ -14,12 +14,11 @@ import {Center, Circle, VStack, Divider, HStack, Button} from 'native-base';
 import Home_FindTalent from './Home_FindTalent';
 import Home_RequestRealTime from './Home_RequestRealTime';
 import Home_Suggestions from './Home_Suggestions';
-
 const images = new Array(4).fill(
   '/Users/kimtaeho/Desktop/4-1/major-experiment/helperIt/helperIt/Assets/helperItLogo.png',
 );
 
-const WorkRequestTab = () => {
+const WorkRequestTab = ({navigation}) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const {width: windowWidth} = useWindowDimensions();
   return (
@@ -84,7 +83,11 @@ const WorkRequestTab = () => {
         }}>
         <HStack space={3}>
           <VStack space={2}>
-            <Button rounded={100} w={60} h={60}></Button>
+            <Button
+              onPress={() => navigation.navigate('RequestTutorial')}
+              rounded={100}
+              w={60}
+              h={60}></Button>
             <Text style={{textAlign: 'center'}}>일거리{'\n'}요청</Text>
           </VStack>
           <VStack space={2}>
