@@ -1,3 +1,4 @@
+//수행시 수행중 스크린에 나올 pressable 버튼(누르면 진행중인 심부름 화면)
 import React from "react";
 import {Badge, Box, Flex, HStack, NativeBaseProvider, Pressable, Spacer, Text} from "native-base";
 import {View} from "react-native";

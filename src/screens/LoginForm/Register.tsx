@@ -14,9 +14,9 @@ import { useRef} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { MainStackParamList } from "../../types/navigation";
+import { LoginStackParamList } from "../../types/navigation";
 
-const Register = ({navigation}:NativeStackScreenProps<MainStackParamList>) => {
+const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
     const [userID, setUserID] = useState('');
     const [password, setPassword] = useState('');

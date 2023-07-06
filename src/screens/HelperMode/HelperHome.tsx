@@ -13,23 +13,28 @@ import {
 } from 'react-native';
 import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import MyPageScreen from "./MyPageScreen"
-import ProceedingScreen from "./ProceedingScreen";
+import { createStackNavigator } from "@react-navigation/stack";
 
+
+import JobScreen from "./JobScreen";
+import ProceedingScreen from "./ProceedingScreen";
+import AbilityScreen from "./AbilityScreen";
+import HelperTalkScreen from "./HelperTalkScreen";
+import MyPageScreen from "./MyPageScreen"
+import PerformanceHistory from "./MyPageList/PerformanceHistory";
+import EditProfile from "./MyPageList/EditProfile";
+import CustomerReview from "./MyPageList/CustomerReview";
+import {HelperMyPageStackParamList} from "../../types/navigation";
 
 const Tap = createBottomTabNavigator();
+const Stack = createStackNavigator<HelperMyPageStackParamList>()
 
-function JobScreen(){
-    return <Text>잡기 화면</Text>
-}
-
-
-function AbilityScreen(){
-    return <Text>재능등록 화면</Text>
-}
-
-function HelperTalkScreen(){
-    return <Text>헬퍼톡 화면</Text>
+const HelperMyPageStack = () =>{
+    return(
+        <Stack.Navigator initialRouteName={"MyPageScreen"}>
+            <Stack.Screen name="마이 페이지" component={MyPageScreen}/>
+        </Stack.Navigator>
+    );
 }
 
 const HelperHome = () => {

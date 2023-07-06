@@ -1,6 +1,7 @@
+//헬퍼 마이페이지 상단
 import React from 'react'
 import {View, StyleSheet, Text, Touchable, Pressable, Alert} from "react-native";
-import {NativeBaseProvider,Avatar, HStack, VStack} from "native-base";
+import {NativeBaseProvider,Avatar, HStack, VStack, TextArea} from "native-base";
 
 //*단독으로 쓰면 이상하게 나옴 반드시 뷰 비율 flex1 : 4비율로 쓸때만 정상적으로 출력
 //*단독으로 쓰면 이상하게 나옴 반드시 뷰 비율 flex1 : 4비율로 쓸때만 정상적으로 출력
@@ -29,7 +30,7 @@ function MyHelperInfo(){
                         <VStack>
                             <Text style={{fontSize:16, color:"#34BEBA", marginTop: '20%',}}>인증헬퍼</Text>
                             <Pressable onPress={onSignUpPressed}>
-                                <Text style={styles.TextSize2}>정산받기></Text>
+                                <Text style={styles.TextSize2}>정산받기{'>'}</Text>
                             </Pressable>
                         </VStack>
                     </View>

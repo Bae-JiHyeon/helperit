@@ -7,6 +7,8 @@ export type LoginStackParamList ={
 }
 
 export type HelperMyPageStackParamList={
-    MyPageScreen: undefined,
-    PerformanceHistory: undefined
+    MyPageScreen: undefined;
+    PerformanceHistory: undefined;
+    CustomerReview:undefined;
+    EditProfile: undefined;
 }

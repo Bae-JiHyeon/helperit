@@ -1,9 +1,16 @@
 import React from 'react'
 import {View, StyleSheet, Text, Touchable, Pressable, Alert} from "react-native";
 import {NativeBaseProvider,Avatar, HStack, VStack} from "native-base";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
+import {HelperMyPageStackParamList, LoginStackParamList} from "../../types/navigation";
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
+
+
 import MyHelperInfo from "../../Components/MyHelperInfo";
 
-function MyPageScreen(){
+
+const MyPageScreen = ({navigation}:NativeStackScreenProps<HelperMyPageStackParamList>) => {
     const onSignUpPressed = () => {
         console.warn("정산받기 동작");
     };
@@ -22,7 +29,7 @@ function MyPageScreen(){
                         총 수행 건수</Text>
                     </View>
                     <View style={styles.MenuTextContainer}>
-                        <Pressable>
+                        <Pressable onPress={() => navigation.navigate("PerformanceHistory")}>
                             <Text style={styles.MenuText}>수행 내역</Text>
                         </Pressable>
                         <Pressable>
@@ -87,7 +94,6 @@ const styles = StyleSheet.create({
     },
     MenuText: {
         fontSize: 25,
-        fontWeight: '500',
         color: '#000000',
         lineHeight: 29.3,
         marginTop: '8%',
