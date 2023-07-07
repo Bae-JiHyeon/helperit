@@ -18,6 +18,7 @@ import Login from './src/screens/LoginForm/Login';
 import Terms from "./src/screens/LoginForm/Terms"
 import HelperHome from "./src/screens/HelperMode/HelperHome";
 import EditProfile from "./src/screens/HelperMode/MyPageList/EditProfile";
+import ForgotPassword from "./src/screens/LoginForm/ForgotPassword";
 
 export enum LoginScreens {
   Login = 'Login',
@@ -31,9 +32,7 @@ export type LoginStackParamList = {
 const Stack = createStackNavigator<LoginStackParamList>()
 const App = () => {
   return (
-      <NavigationContainer>
-        <HelperHome/>
-      </NavigationContainer>
+        <ForgotPassword/>
   );
 };
 //(

@@ -4,10 +4,7 @@ import {
     Text,
     TextInput,
     Dimensions,
-    TouchableOpacity,
-    SafeAreaView,
     ScrollView,
-    Button,
     Pressable
 } from 'react-native';
 import{ useState } from 'react';
@@ -49,7 +46,7 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             autoComplete="off"
                             value={password}
                             onChangeText={val => setPassword(val)}
-                            secureTextEntry
+                            secureTextEntry={true}
                             keyboardType="email-address"/>
                     </View>
                 </View>
@@ -70,7 +67,7 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                 <Text style={styles.otherText}>   |   </Text>
                 <Pressable
                     style={styles.otherButton}
-                    onPress={() => navigation.navigate('Register')}
+                    onPress={() => navigation.navigate('Terms')}
                 >
                     <Text style={styles.otherText}>회원가입</Text>
                 </Pressable>

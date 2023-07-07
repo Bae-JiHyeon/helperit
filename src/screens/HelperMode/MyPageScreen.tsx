@@ -17,7 +17,31 @@ const MyPageScreen = ({navigation}:NativeStackScreenProps<HelperMyPageStackParam
     return(
         <NativeBaseProvider>
             <View style={styles.container}>
-                <MyHelperInfo/>
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <View style={styles.item1} >
+                            <Avatar bg="green.500" size="xl"></Avatar>
+                        </View>
+                        <View style={styles.item2} >
+                            <VStack>
+                                <Pressable onPress={() => navigation.navigate("EditProfile")}>
+                                    <Text style={{fontWeight:'bold',fontSize:16, color:"#000000",}}>이름 넣는곳</Text>
+                                </Pressable>
+                                <Text style={styles.TextSize1}>헬퍼 정보1</Text>
+                                <Text style={styles.TextSize1}>헬퍼 정보2</Text>
+                            </VStack>
+                        </View>
+                        <View style={styles.item3} >
+                            <VStack>
+                                <Text style={{fontSize:16, color:"#34BEBA", marginTop: '20%',}}>인증헬퍼</Text>
+                                <Pressable onPress={onSignUpPressed}>
+                                    <Text style={styles.TextSize2}>정산받기{'>'}</Text>
+                                </Pressable>
+                            </VStack>
+                        </View>
+                    </View>
+                    <View style={{borderBottomColor: 'gray', borderBottomWidth: 2,}}/>
+                </View>
                 <View style={styles.menu}>
                     <View style={{alignItems:'center'}}>
                     <Text style={{
@@ -35,7 +59,7 @@ const MyPageScreen = ({navigation}:NativeStackScreenProps<HelperMyPageStackParam
                         <Pressable>
                             <Text style={styles.MenuText}>일거리 수행 방법</Text>
                         </Pressable>
-                        <Pressable>
+                        <Pressable onPress={() => navigation.navigate("CustomerReview")}>
                             <Text style={styles.MenuText}>고객에게 온 후기</Text>
                         </Pressable>
                         <Pressable>

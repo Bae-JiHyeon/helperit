@@ -27,12 +27,15 @@ import CustomerReview from "./MyPageList/CustomerReview";
 import {HelperMyPageStackParamList} from "../../types/navigation";
 
 const Tap = createBottomTabNavigator();
-const Stack = createStackNavigator<HelperMyPageStackParamList>()
+const Stack = createStackNavigator<HelperMyPageStackParamList>();
 
 const HelperMyPageStack = () =>{
     return(
         <Stack.Navigator initialRouteName={"MyPageScreen"}>
-            <Stack.Screen name="마이 페이지" component={MyPageScreen}/>
+            <Stack.Screen name="MyPageScreen" component={MyPageScreen}/>
+            <Stack.Screen name="EditProfile" component={EditProfile}/>
+            <Stack.Screen name="PerformanceHistory" component={PerformanceHistory}/>
+            <Stack.Screen name={"CustomerReview"} component={CustomerReview}/>
         </Stack.Navigator>
     );
 }
@@ -45,7 +48,7 @@ const HelperHome = () => {
                 <Tap.Screen name="진행중" component={ProceedingScreen}/>
                 <Tap.Screen name="재능등록" component={AbilityScreen}/>
                 <Tap.Screen name="헬퍼톡" component={HelperTalkScreen}/>
-                <Tap.Screen name="마이" component={MyPageScreen}/>
+                <Tap.Screen name="마이" component={HelperMyPageStack}/>
             </Tap.Navigator>
         </NavigationContainer>
     );

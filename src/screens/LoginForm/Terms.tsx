@@ -8,8 +8,9 @@ import serviceTerms from "./term/ServiceTerms";
 
 import ServiceTerms from "./term/ServiceTerms";
 import PrivacyTerms from "./term/PrivacyTerms";
+import {LoginStackParamList} from "../../types/navigation";
 
-const Terms=()=>{
+const Terms=({navigation}:NativeStackScreenProps<LoginStackParamList>)=>{
     const [isChecked, setIsChecked]=useState(false)
 
     return(
@@ -40,7 +41,7 @@ const Terms=()=>{
                     <Checkbox value="one" size="md">전체 동의 하기</Checkbox>
                 </View>
                 <View style={{marginTop: '20%',}}>
-                    <Button title="확인"></Button>
+                    <Button title="확인" onPress={() => navigation.navigate('Register')}></Button>
                 </View>
             </View>
         </NativeBaseProvider>
