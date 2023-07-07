@@ -1,6 +1,3 @@
-//Bottom Tab Navigator 달아야함.
-//각 버튼별로 Stack Navigator 화면전환 구현 필요함
-
 import React, {useRef} from 'react';
 import {
   ScrollView,
@@ -10,7 +7,7 @@ import {
   Animated,
   useWindowDimensions,
 } from 'react-native';
-import {Center, Circle, VStack, Divider, HStack, Button} from 'native-base';
+import {Center, VStack, Divider, HStack, Button} from 'native-base';
 import Home_FindTalent from './Home_FindTalent';
 import Home_RequestRealTime from './Home_RequestRealTime';
 import Home_Suggestions from './Home_Suggestions';
@@ -18,9 +15,10 @@ const images = new Array(4).fill(
   '/Users/kimtaeho/Desktop/4-1/major-experiment/helperIt/helperIt/Assets/helperItLogo.png',
 );
 
-const WorkRequestTab = ({navigation}) => {
+const WorkRequestTab = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const {width: windowWidth} = useWindowDimensions();
+
   return (
     <ScrollView style={{flex: 1}}>
       <View style={styles.scrollContainer}>
@@ -28,15 +26,18 @@ const WorkRequestTab = ({navigation}) => {
           horizontal={true}
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          onScroll={Animated.event([
-            {
-              nativeEvent: {
-                contentOffset: {
-                  x: scrollX,
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: scrollX,
+                  },
                 },
               },
-            },
-          ])}
+            ],
+            {useNativeDriver: true},
+          )}
           scrollEventThrottle={1}>
           {images.map((image, imageIndex) => {
             return (
@@ -75,19 +76,10 @@ const WorkRequestTab = ({navigation}) => {
           })}
         </View>
       </View>
-      <View
-        style={{
-          alignItems: 'center',
-          flex: 0.3,
-          justifyContent: 'center',
-        }}>
+      <View style={{alignItems: 'center', flex: 0.3, justifyContent: 'center'}}>
         <HStack space={3}>
           <VStack space={2}>
-            <Button
-              onPress={() => navigation.navigate('RequestTutorial')}
-              rounded={100}
-              w={60}
-              h={60}></Button>
+            <Button rounded={100} w={60} h={60}></Button>
             <Text style={{textAlign: 'center'}}>일거리{'\n'}요청</Text>
           </VStack>
           <VStack space={2}>
@@ -119,11 +111,6 @@ const WorkRequestTab = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   scrollContainer: {
     height: '11%',
     alignItems: 'center',
@@ -146,8 +133,3 @@ const styles = StyleSheet.create({
 });
 
 export default WorkRequestTab;
-
-/*캐러셀 안에 들어갈 이미지 넣는 코드
-<ImageBackground
-  source={{uri: image}}
-  style={styles.card}></ImageBackground> */
