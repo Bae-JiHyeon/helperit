@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 pod 'RNSVG', path: '../node_modules/react-native-svg/RNSVG.podspec'
 
+=======
+>>>>>>> feature
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
@@ -23,7 +26,11 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+<<<<<<< HEAD
 target 'helperIt' do
+=======
+target 'helperit' do
+>>>>>>> feature
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -45,7 +52,11 @@ target 'helperIt' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+<<<<<<< HEAD
   target 'helperItTests' do
+=======
+  target 'helperitTests' do
+>>>>>>> feature
     inherit! :complete
     # Pods for testing
   end

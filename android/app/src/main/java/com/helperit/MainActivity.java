@@ -13,7 +13,11 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
+<<<<<<< HEAD
     return "helperIt";
+=======
+    return "helperit";
+>>>>>>> feature
   }
 
   /**

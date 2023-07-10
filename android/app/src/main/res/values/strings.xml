@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">helperIt</string>
+=======
+    <string name="app_name">helperit</string>
+>>>>>>> feature
 </resources>

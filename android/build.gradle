@@ -2,7 +2,11 @@
 
 buildscript {
     ext {
+<<<<<<< HEAD
         buildToolsVersion = "33.0.0"
+=======
+        buildToolsVersion = "29.0.2"
+>>>>>>> feature
         minSdkVersion = 21
         compileSdkVersion = 33
         targetSdkVersion = 33
@@ -15,7 +19,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+<<<<<<< HEAD
         classpath("com.android.tools.build:gradle:7.3.1")
+=======
+        classpath("com.android.tools.build:gradle:7.4.1")
+>>>>>>> feature
         classpath("com.facebook.react:react-native-gradle-plugin")
     }
 }
