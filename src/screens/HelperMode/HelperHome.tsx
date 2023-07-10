@@ -1,3 +1,4 @@
+
 import React from 'react'
 import {
     StyleSheet,
@@ -31,7 +32,7 @@ const Stack = createStackNavigator<HelperMyPageStackParamList>();
 
 const HelperMyPageStack = () =>{
     return(
-        <Stack.Navigator initialRouteName={"MyPageScreen"}>
+        <Stack.Navigator initialRouteName={"MyPageScreen"} screenOptions = {{ headerShown: false }}>
             <Stack.Screen name="MyPageScreen" component={MyPageScreen}/>
             <Stack.Screen name="EditProfile" component={EditProfile}/>
             <Stack.Screen name="PerformanceHistory" component={PerformanceHistory}/>

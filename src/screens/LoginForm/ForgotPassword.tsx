@@ -1,3 +1,4 @@
+//비밀번호 찾기 구현
 import React, {useState} from 'react'
 import {StyleSheet, View, Text, TextInput, Dimensions, ScrollView, Pressable, Button, Alert} from 'react-native';
 

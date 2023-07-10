@@ -3,9 +3,9 @@ import MyPageScreen from "../screens/HelperMode/MyPageScreen";
 
 export type LoginStackParamList ={
     Login: undefined;
-    Terms: undefined;
-    Register: undefined;
     ForgotPassword: undefined;
+    Terms:undefined;
+    Register: undefined;
 };
 
 export type HelperMyPageStackParamList={

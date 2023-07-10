@@ -1,3 +1,4 @@
+//회원 가입 화면
 import {
     StyleSheet,
     View,
@@ -50,7 +51,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             }
             setErrorMessage(_errorMassage);
         } else {
-            CheckRef.current = true;
+            //CheckRef.current = true;
         }
     }, [userID, password, repass, userName, Nickname]);
 
@@ -177,11 +178,11 @@ const styles = StyleSheet.create({
 
     buttonLogin:{
         height: 40,
-        backgroundColor: '#92b8b1',
+        backgroundColor: '#34BEBA',
         width: Dimensions.get('window').width - 40,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 100,
+        borderRadius: 10,
     },
 
     buttonText:{

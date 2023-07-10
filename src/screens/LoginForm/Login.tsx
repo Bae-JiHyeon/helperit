@@ -1,3 +1,4 @@
+//로그인 화면
 import {
     StyleSheet,
     View,
@@ -60,8 +61,8 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
             <View style={styles.otherButtonContainer}>
                 <Pressable
-                    onPress={onSignInPressed}
-                    style={styles.otherButton}>
+                    style={styles.otherButton}
+                    onPress={() => navigation.navigate('ForgotPassword')}>
                     <Text style={styles.otherText}>비밀번호 찾기</Text>
                 </Pressable>
                 <Text style={styles.otherText}>   |   </Text>
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
 
     buttonLogin:{
         height: 40,
-        backgroundColor: '#92b8b1',
+        backgroundColor: '#34BEBA',
         width: Dimensions.get('window').width - 40,
         justifyContent: 'center',
         alignItems: 'center',

@@ -1,3 +1,4 @@
+//약관 동의 화면
 import React, {useEffect, useState} from "react"
 import {View, Button, TextInput, Text, TouchableOpacity, StyleSheet, ScrollView, Alert} from "react-native";
 import {Checkbox, Container, TextArea, VStack} from "native-base";
