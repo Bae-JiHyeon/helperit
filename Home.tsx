@@ -25,9 +25,7 @@ const App = () => {
             source={require('./Assets/helperItLogo.png')}
           />
         </AppBar>
-        <NavigationContainer>
-          <TabNavigator />
-        </NavigationContainer>
+        <TabNavigator />
       </View>
     </NativeBaseProvider>
   );

@@ -135,8 +135,7 @@ const RequestPage = () => {
             <Heading>가격</Heading>
             <FormControl
               isRequired={!isOrderCostValid}
-              isInvalid={!isOrderCostValid}
-              errorMessage={''}>
+              isInvalid={!isOrderCostValid}>
               <FormControl.Label>가격</FormControl.Label>
               <Input
                 h={10}
@@ -168,7 +167,7 @@ const RequestPage = () => {
         </Box>
       </ScrollView>
       <Modal isOpen={open} onClose={() => setOpen(false)} safeAreaTop={true}>
-        <Modal.Content maxWidth="350" {...styles[placement]}>
+        <Modal.Content maxWidth="350">
           {/* <Modal.CloseButton /> */}
           <Modal.Body>
             <Heading fontSize={'md'} textAlign={'center'}>

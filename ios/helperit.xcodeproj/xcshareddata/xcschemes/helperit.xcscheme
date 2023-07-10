@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "helperit.app"
-               BlueprintName = "helperit"
-               ReferencedContainer = "container:helperit.xcodeproj">
+               BuildableName = "helperIt.app"
+               BlueprintName = "helperIt"
+               ReferencedContainer = "container:helperIt.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "helperitTests.xctest"
-               BlueprintName = "helperitTests"
-               ReferencedContainer = "container:helperit.xcodeproj">
+               BuildableName = "helperItTests.xctest"
+               BlueprintName = "helperItTests"
+               ReferencedContainer = "container:helperIt.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "helperit.app"
-            BlueprintName = "helperit"
-            ReferencedContainer = "container:helperit.xcodeproj">
+            BuildableName = "helperIt.app"
+            BlueprintName = "helperIt"
+            ReferencedContainer = "container:helperIt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "helperit.app"
-            BlueprintName = "helperit"
-            ReferencedContainer = "container:helperit.xcodeproj">
+            BuildableName = "helperIt.app"
+            BlueprintName = "helperIt"
+            ReferencedContainer = "container:helperIt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

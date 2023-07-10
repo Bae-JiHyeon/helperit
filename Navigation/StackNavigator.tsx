@@ -1,3 +1,4 @@
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import RequestPage from '../UserMode_Screens/RequestPage';
 import RequestTutorial from '../UserMode_Screens/RequestTutorial';
@@ -12,6 +13,7 @@ const StackNavigator = () => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="RequestTutorial" component={RequestTutorial} />
       <Stack.Screen name="RequestPage" component={RequestPage} />
+      <Stack.Screen name="WorkRequestTab" component={WorkRequestTab} />
     </Stack.Navigator>
   );
 };
