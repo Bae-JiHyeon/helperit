@@ -66,7 +66,7 @@ const ForgotPassword = () =>{
                 style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
             />
             <TextInput
-                placeholder="아이디"
+                placeholder="이메일"
                 value={username}
                 onChangeText={setUsername}
                 style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
