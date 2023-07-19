@@ -1,3 +1,4 @@
+//헬퍼 가입 시 나오는 모달 (동의하고 시작하기 누를시 팝업이 새로 뜨는건 구현X)
 import React, {useState} from "react";
 import {Alert, Modal, View, StyleSheet, Text, Pressable} from "react-native";
 import {NativeBaseProvider, Checkbox, HStack} from "native-base";

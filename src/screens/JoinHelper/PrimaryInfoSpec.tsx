@@ -3,11 +3,13 @@ import React from "react";
 import {Dimensions, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import BankList from "../../Components/BankList";
 import {Checkbox, HStack, NativeBaseProvider, VStack} from "native-base";
+import {JoinHelperStackParamList} from "../../types/navigation";
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
 
 const onSignInPressed = () => {
     console.warn("onSignInPressed");
 };
-const PrimaryInfoSpec=()=>{
+const PrimaryInfoSpec=({navigation}:NativeStackScreenProps<JoinHelperStackParamList>)=>{
     return(
         <NativeBaseProvider>
             <View style={styles.container}>
@@ -39,6 +41,19 @@ const PrimaryInfoSpec=()=>{
                     <View style={styles.item4}>
                         <Pressable onPress={onSignInPressed} style={styles.buttonLogin}>
                             <Text>저장</Text>
+                        </Pressable>
+                    </View>
+                </View>
+                <View style={{height:65}}>
+                    <View style={styles.naviBar}>
+                        <Pressable onPress={()=>navigation.navigate('PrimaryInfoBank')}>
+                            <Text style={{fontSize:25,}}>{"<"}</Text>
+                        </Pressable>
+                        <View style={styles.grayCircle}/>
+                        <View style={styles.grayCircle}/>
+                        <View style={styles.circle}/>
+                        <Pressable>
+                            <Text style={{fontSize:25,}}>{">"}</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -96,6 +111,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 100,
         marginTop: 20
+    },
+    circle: {
+        width: 20,
+        height: 20,
+        borderRadius: 100 / 2,
+        backgroundColor: "#0066ff",
+        marginLeft: "5%",
+        marginEnd: "5%"
+    },
+    grayCircle: {
+        width: 20,
+        height: 20,
+        borderRadius: 100 / 2,
+        backgroundColor: "#cbcbcb",
+        marginLeft: "5%",
+        marginEnd: "5%"
+    },
+    naviBar:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+        padding:"5%",
+        backgroundColor:"#FFFFFF"
     },
 })
 export default PrimaryInfoSpec;

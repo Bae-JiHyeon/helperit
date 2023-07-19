@@ -1,6 +1,3 @@
-import type {RouteProp} from "@react-navigation/native";
-import MyPageScreen from "../screens/HelperMode/MyPageScreen";
-
 export type LoginStackParamList ={
     Login: undefined;
     ForgotPassword: undefined;
@@ -13,4 +10,10 @@ export type HelperMyPageStackParamList={
     PerformanceHistory: undefined;
     CustomerReview:undefined;
     EditProfile: undefined;
+};
+
+export type JoinHelperStackParamList={
+    PrimaryInfo: undefined;
+    PrimaryInfoBank: undefined;
+    PrimaryInfoSpec: undefined;
 };

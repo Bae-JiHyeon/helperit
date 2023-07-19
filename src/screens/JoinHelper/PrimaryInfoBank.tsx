@@ -1,3 +1,4 @@
+//헬퍼 가입 은행 정보 입력
 import React, {useState} from "react"
 import {
     View,
@@ -8,11 +9,13 @@ import {
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard, Pressable
 } from "react-native";
 import { HStack, NativeBaseProvider,} from "native-base";
 import BankList from "../../Components/BankList";
-const PrimaryInfoBank = ()=>{
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
+import {JoinHelperStackParamList} from "../../types/navigation";
+const PrimaryInfoBank = ({navigation}:NativeStackScreenProps<JoinHelperStackParamList>)=>{
     const[accHolderName, setAccHolderName] = useState<string>('')
     const[accNo, setAccNo] = useState<number>()
     return(
@@ -42,6 +45,19 @@ const PrimaryInfoBank = ()=>{
                                     <TextInput style={styles.NumInput} keyboardType={"number-pad"}/>
                                 </HStack>
                             </View>
+                            <View style={{height:65}}>
+                                <View style={styles.naviBar}>
+                                    <Pressable onPress={()=>navigation.navigate('PrimaryInfo')}>
+                                        <Text style={{fontSize:25,}}>{"<"}</Text>
+                                    </Pressable>
+                                    <View style={styles.grayCircle}/>
+                                    <View style={styles.circle}/>
+                                    <View style={styles.grayCircle}/>
+                                    <Pressable onPress={()=>navigation.navigate('PrimaryInfoSpec')}>
+                                        <Text style={{fontSize:25,}}>{">"}</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
                         </View>
                     </TouchableWithoutFeedback>
                 </KeyboardAvoidingView>
@@ -60,14 +76,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     item2: {
-        height: 170,
-        backgroundColor: '#FFFFFF',
-
-
-    },
+        height: 600,
+        backgroundColor: '#FFFFFF',    },
     item3: {
         flex: 1,
-        backgroundColor: '#4ebd7a',
+        backgroundColor: '#ffffff',
     },
     item4:{
         flex:1,
@@ -108,6 +121,29 @@ const styles = StyleSheet.create({
         width: 130,
         padding: 5,
         marginLeft: "5%"
+    },
+    circle: {
+        width: 20,
+        height: 20,
+        borderRadius: 100 / 2,
+        backgroundColor: "#0066ff",
+        marginLeft: "5%",
+        marginEnd: "5%"
+    },
+    grayCircle: {
+        width: 20,
+        height: 20,
+        borderRadius: 100 / 2,
+        backgroundColor: "#cbcbcb",
+        marginLeft: "5%",
+        marginEnd: "5%"
+    },
+    naviBar:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+        padding:"5%",
+        backgroundColor:"#FFFFFF"
     },
 })
 export default PrimaryInfoBank;
