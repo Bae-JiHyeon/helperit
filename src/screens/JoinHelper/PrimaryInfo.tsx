@@ -24,7 +24,7 @@ const PrimaryInfo = ({navigation}:NativeStackScreenProps<JoinHelperStackParamLis
                 <View style={styles.item4}>
                     <Text style={styles.BoldText}>자격증</Text>
                 </View>
-                <View style={{height:70}}>
+                <View style={{height:65}}>
                     <View style={styles.naviBar}>
                         <Pressable>
                             <Text style={{fontSize:25,}}>{"<"}</Text>
@@ -57,11 +57,11 @@ const styles = StyleSheet.create({
     },
     item3: {
         flex: 1,
-        backgroundColor: '#4ebd7a',
+        backgroundColor: '#ffffff',
     },
     item4:{
         flex:1,
-        backgroundColor: '#e3a337'
+        backgroundColor: '#ffffff'
     },
     TopText:{
         fontSize: 16,

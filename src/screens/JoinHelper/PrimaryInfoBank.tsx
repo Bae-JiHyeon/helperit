@@ -45,7 +45,7 @@ const PrimaryInfoBank = ({navigation}:NativeStackScreenProps<JoinHelperStackPara
                                     <TextInput style={styles.NumInput} keyboardType={"number-pad"}/>
                                 </HStack>
                             </View>
-                            <View style={{height:65}}>
+                            <View style={{height:67}}>
                                 <View style={styles.naviBar}>
                                     <Pressable onPress={()=>navigation.navigate('PrimaryInfo')}>
                                         <Text style={{fontSize:25,}}>{"<"}</Text>

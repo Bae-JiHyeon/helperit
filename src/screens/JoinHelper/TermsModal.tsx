@@ -42,9 +42,9 @@ const TermsModal = () =>{
                     </View>
                 </Modal>
                 <Pressable
-                    style={[styles.button, styles.buttonOpen]}
+                    style={styles.buttonLogin}
                     onPress={() => setModalVisible(true)}>
-                    <Text style={styles.textStyle}>Show Modal</Text>
+                    <Text style={styles.textStyle}>저장</Text>
                 </Pressable>
             </View>
         </NativeBaseProvider>
@@ -105,8 +105,16 @@ const styles = StyleSheet.create({
         marginLeft: 60,
         fontSize: 16,
         textDecorationLine: "underline"
-
-    }
+    },
+    buttonLogin:{
+        height: 40,
+        backgroundColor: '#34BEBA',
+        width: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100,
+        marginTop: 20
+    },
 });
 
 export default TermsModal;

@@ -1,15 +1,18 @@
 //헬퍼 전문분야, 이동 수단 선택
-import React from "react";
+import React, {useState} from "react";
 import {Dimensions, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import BankList from "../../Components/BankList";
 import {Checkbox, HStack, NativeBaseProvider, VStack} from "native-base";
 import {JoinHelperStackParamList} from "../../types/navigation";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
+import TermsModal from "./TermsModal";
 
 const onSignInPressed = () => {
     console.warn("onSignInPressed");
 };
 const PrimaryInfoSpec=({navigation}:NativeStackScreenProps<JoinHelperStackParamList>)=>{
+    const [modalVisible, setModalVisible] = useState(false);
+
     return(
         <NativeBaseProvider>
             <View style={styles.container}>
@@ -38,11 +41,7 @@ const PrimaryInfoSpec=({navigation}:NativeStackScreenProps<JoinHelperStackParamL
                         <Checkbox value="Trash" style={styles.checkBox}>화물차</Checkbox>
                         <Checkbox value="Delivery" style={styles.checkBox}>도보</Checkbox>
                     </HStack>
-                    <View style={styles.item4}>
-                        <Pressable onPress={onSignInPressed} style={styles.buttonLogin}>
-                            <Text>저장</Text>
-                        </Pressable>
-                    </View>
+                    <TermsModal/> {/* 저장을 누리면 나오는 모달 */}
                 </View>
                 <View style={{height:65}}>
                     <View style={styles.naviBar}>
