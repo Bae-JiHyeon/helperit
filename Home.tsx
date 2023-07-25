@@ -2,12 +2,10 @@ import React from 'react';
 import {View, Image, StyleSheet, StatusBar} from 'react-native';
 import {NativeBaseProvider} from 'native-base';
 import {AppBar} from '@react-native-material/core';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer} from '@react-navigation/native';
 
 import TabNavigator from './Navigation/TabNavigator';
 
-const App = () => {
+const Home = () => {
   return (
     <NativeBaseProvider>
       <View style={{flex: 1}}>
@@ -22,12 +20,10 @@ const App = () => {
           }}>
           <Image
             style={style.logo}
-            source={require('./Assets/helperItLogo.png')}
+            source={require('./src/assets/helperItLogo.png')}
           />
         </AppBar>
-        <NavigationContainer>
-          <TabNavigator />
-        </NavigationContainer>
+        <TabNavigator />
       </View>
     </NativeBaseProvider>
   );
@@ -41,12 +37,4 @@ const style = StyleSheet.create({
   },
 });
 
-const AppProvider = () => {
-  return (
-    <SafeAreaProvider>
-      <App />
-    </SafeAreaProvider>
-  );
-};
-
-export default AppProvider;
+export default Home;

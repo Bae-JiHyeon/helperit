@@ -21,15 +21,36 @@ import {SelectList} from 'react-native-dropdown-select-list';
 import {ScrollView, TextInput} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
-const RequestPage = () => {
+const RequestPage = ({navigation}) => {
   const openModal = placement => {
     setOpen(true);
     setPlacement(placement);
   };
+
+  const handleNextButtonPress = () => {
+    setOpen(false);
+    const totalCost = calculateTotalCost();
+    navigation.navigate('RequestDetail', {
+      selectedTiming,
+      startLatitude,
+      startLongitude,
+      endLatitude,
+      endLongitude,
+      totalCost, // totalCost를 params로 전달
+    });
+  };
+
   const [placement, setPlacement] = useState(undefined);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = React.useState('');
-  const [orderCost, setOrderCost] = useState('');
+  const [orderCost, setOrderCost] = useState(0);
+  const [purchaseCost, setPurchaseCost] = useState(0);
+  const [selectedTiming, setSelectedTiming] = useState('');
+
+  const [startLatitude, setStartLatitude] = useState(null);
+  const [startLongitude, setStartLongitude] = useState(null);
+  const [endLatitude, setEndLatitude] = useState(null);
+  const [endLongitude, setEndLongitude] = useState(null);
 
   const data_categories = [
     {key: 'Request', value: '일거리 요청'},
@@ -37,27 +58,48 @@ const RequestPage = () => {
     {key: 'CleanUp', value: '가정집 청소'},
   ];
   const data_timing = [
-    {key: 'Urgent', value: '즉시수행'},
-    {key: 'Check', value: '예약수행'},
+    {key: '즉시수행', value: '즉시수행'},
+    {key: '예약수행', value: '예약수행'},
   ];
   const data_isNeedPurchase = [
     {key: 'false', value: '구매 불필요'},
     {key: 'true', value: '구매 필요'},
   ];
+  const handleTimingSelect = value => {
+    setSelectedTiming(value);
+  };
+  // 시작 위치 선택 핸들러
+  const handleStartLocationSelect = (data, details) => {
+    const {lat, lng} = details.geometry.location;
+    setStartLatitude(lat);
+    setStartLongitude(lng);
+  };
+
+  // 도착 위치 선택 핸들러
+  const handleEndLocationSelect = (data, details) => {
+    const {lat, lng} = details.geometry.location;
+    setEndLatitude(lat);
+    setEndLongitude(lng);
+  };
 
   const handleOrderCostChange = value => {
     // 입력된 주문 비용을 상태값으로 업데이트
     setOrderCost(value);
   };
+  const handlePurchaseCostChange = value => {
+    // 입력된 주문 비용을 상태값으로 업데이트
+    setPurchaseCost(value);
+  };
   const calculateTotalCost = () => {
     // 계산 로직 작성
     const matchingFee = 1400; // 매칭 수수료
     const minimumOrderCost = 10000; // 최소 일거리 주문 비용
-    const totalCost = parseInt(orderCost) + matchingFee; // 총 일거리 비용 계산
+    const totalCost =
+      parseInt(purchaseCost) + parseInt(orderCost) + matchingFee; // 총 일거리 비용 계산
     return totalCost;
   };
 
-  const isOrderCostValid = orderCost !== '' && parseInt(orderCost) >= 10000;
+  const isOrderCostValid = orderCost !== 0 && orderCost >= 10000;
 
   return (
     <NativeBaseProvider>
@@ -75,7 +117,7 @@ const RequestPage = () => {
             <SelectList
               placeholder={'옵션을 선택해주세요.'}
               search={false}
-              setSelected={setSelected}
+              setSelected={handleTimingSelect}
               data={data_timing}
             />
             <Heading>물품 구매비</Heading>
@@ -87,9 +129,13 @@ const RequestPage = () => {
             />
             {selected === 'true' && (
               <>
-                <Input placeholder={'예상 구매 가격을 입력하세요'} />
+                <Input
+                  onChangeText={handlePurchaseCostChange}
+                  placeholder={'예상 구매 가격을 입력하세요'}
+                />
               </>
             )}
+
             <VStack>
               <Heading>일거리 요청 내용</Heading>
               <Text fontSize={'xs'} paddingLeft={3}>
@@ -102,10 +148,13 @@ const RequestPage = () => {
             <Heading>수행지</Heading>
             <Box borderWidth={1} borderRadius="md" borderColor="gray.300">
               <GooglePlacesAutocomplete
+                fetchDetails={true}
                 placeholder="수행지를 입력하세요."
                 onPress={(data, details = null) => {
                   // 'details' is provided when fetchDetails = true
-                  console.log(data, details);
+                  handleStartLocationSelect(data, details);
+                  console.log('Start Latitude:', startLatitude);
+                  console.log('Start Longitude:', startLongitude);
                 }}
                 query={{
                   key: 'AIzaSyCBTUMAu0Vl6TthTX6Hv7CT4Fdc-FOXDQ4',
@@ -116,10 +165,13 @@ const RequestPage = () => {
             <Heading>도착지</Heading>
             <Box borderWidth={1} borderRadius="md" borderColor="gray.300">
               <GooglePlacesAutocomplete
+                fetchDetails={true}
                 placeholder="도착지를 입력하세요."
                 onPress={(data, details = null) => {
                   // 'details' is provided when fetchDetails = true
-                  console.log(data, details);
+                  handleEndLocationSelect(data, details);
+                  console.log('End Latitude:', endLatitude);
+                  console.log('End Longitude:', endLongitude);
                 }}
                 query={{
                   key: 'AIzaSyCBTUMAu0Vl6TthTX6Hv7CT4Fdc-FOXDQ4',
@@ -135,8 +187,7 @@ const RequestPage = () => {
             <Heading>가격</Heading>
             <FormControl
               isRequired={!isOrderCostValid}
-              isInvalid={!isOrderCostValid}
-              errorMessage={''}>
+              isInvalid={!isOrderCostValid}>
               <FormControl.Label>가격</FormControl.Label>
               <Input
                 h={10}
@@ -168,7 +219,7 @@ const RequestPage = () => {
         </Box>
       </ScrollView>
       <Modal isOpen={open} onClose={() => setOpen(false)} safeAreaTop={true}>
-        <Modal.Content maxWidth="350" {...styles[placement]}>
+        <Modal.Content maxWidth="350">
           {/* <Modal.CloseButton /> */}
           <Modal.Body>
             <Heading fontSize={'md'} textAlign={'center'}>
@@ -185,12 +236,7 @@ const RequestPage = () => {
                 CANCEL
               </Button>
               <Spacer />
-              <Button
-                onPress={() => {
-                  setOpen(false);
-                }}>
-                OK
-              </Button>
+              <Button onPress={handleNextButtonPress}>OK</Button>
             </HStack>
           </Modal.Body>
         </Modal.Content>
@@ -216,7 +262,6 @@ const styles = {
     marginLeft: 'auto',
     marginRight: 0,
   },
-  center: {},
 };
 
 export default RequestPage;

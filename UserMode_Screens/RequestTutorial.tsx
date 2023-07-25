@@ -4,6 +4,7 @@
 import React from 'react';
 import {
   Box,
+  Button,
   Checkbox,
   Heading,
   HStack,
@@ -13,7 +14,7 @@ import {
 } from 'native-base';
 import {ScrollView} from 'react-native';
 
-const RequestTutorial = () => {
+const RequestTutorial = ({navigation}) => {
   return (
     <NativeBaseProvider>
       <ScrollView>
@@ -76,6 +77,9 @@ const RequestTutorial = () => {
           />
           <Text fontSize="2xl">다시 보지 않기</Text>
         </HStack>
+        <Button onPress={() => navigation.navigate('RequestPage')}>
+          일거리 요청하기
+        </Button>
       </ScrollView>
     </NativeBaseProvider>
   );

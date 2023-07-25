@@ -9,7 +9,7 @@ const Tab = createMaterialTopTabNavigator();
 const TabNavigator = () => {
   return (
     <NativeBaseProvider>
-      <Tab.Navigator swipeEnabled={false}>
+      <Tab.Navigator screenOptions={{swipeEnabled: false}}>
         <Tab.Screen component={WorkRequestTab} name="일거리 요청" />
         <Tab.Screen component={HelperModeTab} name="헬퍼 모드" />
       </Tab.Navigator>
