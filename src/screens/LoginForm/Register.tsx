@@ -33,7 +33,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
     const [userName, setUserName] = useState<string>('');
     const [nickname, setNickName] = useState<string>('');
     const [errorMessage, setErrorMessage] =useState('');
-    const [lodding, setLodding]=useState()
+    const [loading, setLoading]=useState()
 
     const userIDRef = useRef();
     const passwordRef = useRef();
