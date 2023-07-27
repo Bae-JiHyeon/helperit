@@ -16,6 +16,7 @@ const Terms=({navigation}:NativeStackScreenProps<LoginStackParamList>)=>{
 
     return(
         <NativeBaseProvider>
+            <View></View>
             <View style={styles.container}>
                 <View style={styles.signInTextContainer}>
                     <Text style={styles.signInText}>회원가입</Text>
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
+        backgroundColor: "#FFFFFF"
     },
 
     textInput: {
