@@ -1,4 +1,4 @@
-//회원 가입 화면
+//회원 가입 화면 텍스트 인풋 손봐야함
 import {
     StyleSheet,
     View,
@@ -12,19 +12,28 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { useRef} from 'react';
+import axios, {isAxiosError, AxiosResponse} from "axios";
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { LoginStackParamList } from "../../types/navigation";
 
+interface userData {
+    userID: string;
+    password: string;
+    confirmpass: string;
+    userName: string;
+    nickname: string;
+}
 const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
-    const [userID, setUserID] = useState('');
-    const [password, setPassword] = useState('');
-    const [repass, setRePass]= useState('');
-    const [userName, setUserName] = useState('');
-    const [Nickname, setNickName] = useState('');
+    const [userID, setUserID] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [confirmpass, setConfirmPass]= useState<string>('');
+    const [userName, setUserName] = useState<string>('');
+    const [nickname, setNickName] = useState<string>('');
     const [errorMessage, setErrorMessage] =useState('');
+    const [lodding, setLodding]=useState()
 
     const userIDRef = useRef();
     const passwordRef = useRef();
@@ -33,6 +42,25 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
     const nicknameRef = useRef();
     const CheckRef = useRef();
 
+    const SignUp=()=>{
+        const userData: userData = {
+            userID: userID,
+            password: password,
+            confirmpass: confirmpass,
+            userName: userName,
+            nickname: nickname,
+        };
+        const registerURL ="서버 URL";
+
+        axios.post<userData, AxiosResponse<any>>(registerURL, userData)
+            .then((response) =>{
+                console.log('회원가입이 완료되었습니다.',response.data);
+            })
+            .catch((error)=>{
+                console.error('회원가입 실패:', error);
+            });
+    }
+
     useEffect(() =>{
         if (CheckRef.current){
             let _errorMassage = '';
@@ -40,11 +68,11 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                 _errorMassage = '아이디 입력해주세요'
             } else if (password.length < 8){
                 _errorMassage = '8자 이상의 비밀번호를 입력해주세요'
-            } else if (password !== repass){
+            } else if (password !== confirmpass){
                 _errorMassage = '입력하신 비밀번호가 일치하지 않습니다'
             } else if (!userName){
                 _errorMassage = '이름을 입력해주세요'
-            } else if (!Nickname){
+            } else if (!nickname){
                 _errorMassage = '별명을 입력해주세요'
             } else {
                 _errorMassage ='';
@@ -53,7 +81,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
         } else {
             //CheckRef.current = true;
         }
-    }, [userID, password, repass, userName, Nickname]);
+    }, [userID, password, confirmpass, userName, nickname]);
 
     const onSignUpPressed = () => {
         console.warn("onSignUpPressed");
@@ -86,7 +114,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             autoComplete="off"
                             value={password}
                             onChangeText={value => setPassword(value)}
-                            secureTextEntry
+                            secureTextEntry={true}
                             keyboardType="email-address"/>
                     </View>
 
@@ -99,8 +127,8 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             maxLength={21}
                             autoCapitalize="none"
                             autoComplete="off"
-                            value={repass}
-                            onChangeText={value => setRePass(value)}
+                            value={confirmpass}
+                            onChangeText={value => setConfirmPass(value)}
                             secureTextEntry
                             keyboardType="email-address"/>
                     </View>
@@ -125,7 +153,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             placeholder="별명 입력"
                             maxLength={10}
                             autoCapitalize="none"
-                            value={Nickname}
+                            value={nickname}
                             onChangeText={value =>setNickName(value)}
                             keyboardType="email-address"
                         />
@@ -136,7 +164,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
             <Pressable
                 style={styles.buttonLogin}
-                onPress={onSignUpPressed}
+                onPress={SignUp}
             >
                 <Text style={styles.otherText}>회원가입</Text>
             </Pressable>
