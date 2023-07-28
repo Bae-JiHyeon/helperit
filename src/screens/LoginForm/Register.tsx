@@ -1,4 +1,4 @@
-//회원 가입 화면 텍스트 인풋 손봐야함
+//회원 가입 화면 텍스트 인풋 손봐야함(추가 해야 하는것들: 1. 아이디 최소 4자리 이상으로 적게 하기, 중복 확인, 비밀번호  최소 8자리 이상
 import {
     StyleSheet,
     View,
@@ -21,7 +21,7 @@ import { LoginStackParamList } from "../../types/navigation";
 interface userData {
     userID: string;
     password: string;
-    confirmpass: string;
+    confirmPass: string;
     userName: string;
     nickname: string;
 }
@@ -29,24 +29,44 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
     const [userID, setUserID] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [confirmpass, setConfirmPass]= useState<string>('');
+    const [confirmPass, setConfirmPass]= useState<string>('');
     const [userName, setUserName] = useState<string>('');
     const [nickname, setNickName] = useState<string>('');
     const [errorMessage, setErrorMessage] =useState('');
+    const [disabled, setDisabled] = useState(true);
     const [loading, setLoading]=useState()
 
-    const userIDRef = useRef();
-    const passwordRef = useRef();
-    const repassRef = useRef();
-    const userNameRef = useRef();
-    const nicknameRef = useRef();
-    const CheckRef = useRef();
+    const CheckRef = useRef(true);
+
+    useEffect(() => {
+        setDisabled(
+            !(userID && password && confirmPass && userName && nickname && !errorMessage),
+        );
+    }, [userID, password, confirmPass, userName, nickname, errorMessage]);
+
+    useEffect(() => {
+            let _errorMassage: string = '';
+            if(!userID){
+                _errorMassage = '아이디 입력해주세요';
+            } else if (password.length < 8){
+                _errorMassage = '8자 이상의 비밀번호를 입력해주세요';
+            } else if (password !== confirmPass){
+                _errorMassage = '입력하신 비밀번호가 일치하지 않습니다';
+            } else if (!userName){
+                _errorMassage = '이름을 입력해주세요';
+            } else if (!nickname){
+                _errorMassage = '별명을 입력해주세요';
+            } else {
+                _errorMassage ='';
+            }
+            setErrorMessage(_errorMassage);
+    }, [userID, password, confirmPass, userName, nickname]);
 
     const SignUp=()=>{
         const userData: userData = {
             userID: userID,
             password: password,
-            confirmpass: confirmpass,
+            confirmPass: confirmPass,
             userName: userName,
             nickname: nickname,
         };
@@ -61,31 +81,11 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             });
     }
 
-    useEffect(() =>{
-        if (CheckRef.current){
-            let _errorMassage = '';
-            if(!userID){
-                _errorMassage = '아이디 입력해주세요'
-            } else if (password.length < 8){
-                _errorMassage = '8자 이상의 비밀번호를 입력해주세요'
-            } else if (password !== confirmpass){
-                _errorMassage = '입력하신 비밀번호가 일치하지 않습니다'
-            } else if (!userName){
-                _errorMassage = '이름을 입력해주세요'
-            } else if (!nickname){
-                _errorMassage = '별명을 입력해주세요'
-            } else {
-                _errorMassage ='';
-            }
-            setErrorMessage(_errorMassage);
-        } else {
-            //CheckRef.current = true;
-        }
-    }, [userID, password, confirmpass, userName, nickname]);
-
-    const onSignUpPressed = () => {
-        console.warn("onSignUpPressed");
-    };
+    console.log("User ID:", userID);
+    console.log("Password:", password);
+    console.log("Confirm Password:", confirmPass);
+    console.log("User Name:", userName);
+    console.log("Nickname:", nickname);
 
     return(
         <ScrollView style={styles.container}>
@@ -127,7 +127,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             maxLength={21}
                             autoCapitalize="none"
                             autoComplete="off"
-                            value={confirmpass}
+                            value={confirmPass}
                             onChangeText={value => setConfirmPass(value)}
                             secureTextEntry
                             keyboardType="email-address"/>
@@ -165,7 +165,7 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             <Pressable
                 style={styles.buttonLogin}
                 onPress={SignUp}
-            >
+                disabled={disabled}>
                 <Text style={styles.otherText}>회원가입</Text>
             </Pressable>
 

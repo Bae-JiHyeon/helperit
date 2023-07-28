@@ -10,7 +10,7 @@ import JoinHelperStack from "./src/screens/JoinHelper/JoinHelperStack";
 import Map from "./src/Components/Map";
 
 const App = () => {
-  return <Map/>
+  return <LoginFormNavigator/>
 
 };
 
