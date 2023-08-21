@@ -62,31 +62,31 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             setErrorMessage(_errorMassage);
     }, [userID, password, confirmPass, userName, nickname]);
 
-    const SignUp=()=>{
-        const userData: userData = {
-            userID: userID,
-            password: password,
-            confirmPass: confirmPass,
-            userName: userName,
-            nickname: nickname,
-        };
-        const registerURL ="서버 URL";
+    const SignUp = async () => {
+        try {
+            const userData: userData = {
+                userID,
+                password,
+                confirmPass,
+                userName,
+                nickname,
+            };
 
-        axios.post<userData, AxiosResponse<any>>(registerURL, userData)
-            .then((response) =>{
-                console.log('회원가입이 완료되었습니다.',response.data);
-            })
-            .catch((error)=>{
-                console.error('회원가입 실패:', error);
-            });
-    }
+            const response = await axios.post('https://api.example.com/register', userData);
+
+            console.log('User registered successfully:', response.data);
+
+            // 이후 필요한 동작 수행 (예: 회원가입 완료 후 화면 이동 등)
+        } catch (error) {
+            console.error('Error registering user:', error);
+        }
+    };
 
     console.log("User ID:", userID);
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPass);
     console.log("User Name:", userName);
     console.log("Nickname:", nickname);
-
     return(
         <ScrollView style={styles.container}>
             <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
