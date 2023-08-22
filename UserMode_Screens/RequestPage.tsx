@@ -29,17 +29,50 @@ const RequestPage = ({navigation}) => {
 
   const handleNextButtonPress = () => {
     setOpen(false);
+    const purchaseFee = purchaseCost;
     const totalCost = calculateTotalCost();
+    console.log('startLocation is : ' + startLatitude + ', ' + startLongitude);
+    console.log('endLocation is : ' + endLatitude + ', ' + endLongitude);
+
     navigation.navigate('RequestDetail', {
-      selectedTiming,
-      startLatitude,
-      startLongitude,
-      endLatitude,
-      endLongitude,
-      totalCost, // totalCost를 params로 전달
+      selectedTiming, //즉시, 나중
+      startLatitude, //지도에 쓸 경유지 위도
+      startLongitude, //경유지 경도
+      endLatitude, //도착지 위도
+      endLongitude, //도착지 경도
+      totalCost, //일거리 요청 비용
+      purchaseFee, //물품 구매 비용
+      request, //일거리 요청 내용
+      isNeed, //물품 구매 필요 여부
+      startLocName,
+      endLocName,
+      otherInfo,
     });
+
+    /*
+    일거리 요청 누를 시 정보를 다음 페이지가 아닌 백엔드로 POST 요청을 보내는 코드.
+    const apiUrl = '백엔드 API의 URL';
+
+    // axios를 사용하여 POST 요청 보내기
+    axios.post(apiUrl, requestData)
+      .then(response => {
+        // 요청이 성공한 경우에 수행할 동작
+        console.log('요청이 성공하였습니다.', response.data);
+        navigation.navigate('다음화면의 이름'); // 다음 화면으로 이동
+      })
+      .catch(error => {
+        // 요청이 실패한 경우에 수행할 동작
+        console.error('요청이 실패하였습니다.', error);
+        // 에러 처리 로직 추가
+      });
+     */
   };
 
+  const [otherInfo, setOtherInfo] = useState('');
+  const [endLocName, setEndLocName] = useState('');
+  const [startLocName, setStartLocName] = useState('');
+  const [isNeed, setIsNeed] = useState('');
+  const [request, setRequest] = useState('');
   const [placement, setPlacement] = useState(undefined);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = React.useState('');
@@ -62,8 +95,8 @@ const RequestPage = ({navigation}) => {
     {key: '예약수행', value: '예약수행'},
   ];
   const data_isNeedPurchase = [
-    {key: 'false', value: '구매 불필요'},
-    {key: 'true', value: '구매 필요'},
+    {key: '구매 불필요', value: '구매 불필요'},
+    {key: '구매 필요', value: '구매 필요'},
   ];
   const handleTimingSelect = value => {
     setSelectedTiming(value);
@@ -71,27 +104,41 @@ const RequestPage = ({navigation}) => {
   // 시작 위치 선택 핸들러
   const handleStartLocationSelect = (data, details) => {
     const {lat, lng} = details.geometry.location;
+    const {formatted_address} = details;
+    setStartLocName(formatted_address);
     setStartLatitude(lat);
     setStartLongitude(lng);
+    return details.formatted_address;
+  };
+
+  const handleIsNeed = value => {
+    setIsNeed(value);
   };
 
   // 도착 위치 선택 핸들러
   const handleEndLocationSelect = (data, details) => {
     const {lat, lng} = details.geometry.location;
+    const {formatted_address} = details;
+    setEndLocName(formatted_address);
     setEndLatitude(lat);
     setEndLongitude(lng);
   };
 
+  const handleOtherInfo = value => {
+    setOtherInfo(value);
+  };
+
   const handleOrderCostChange = value => {
-    // 입력된 주문 비용을 상태값으로 업데이트
     setOrderCost(value);
   };
+
+  const handleRequestChange = text => {
+    setRequest(text);
+  };
   const handlePurchaseCostChange = value => {
-    // 입력된 주문 비용을 상태값으로 업데이트
     setPurchaseCost(value);
   };
   const calculateTotalCost = () => {
-    // 계산 로직 작성
     const matchingFee = 1400; // 매칭 수수료
     const minimumOrderCost = 10000; // 최소 일거리 주문 비용
     const totalCost =
@@ -100,7 +147,6 @@ const RequestPage = ({navigation}) => {
   };
 
   const isOrderCostValid = orderCost !== 0 && orderCost >= 10000;
-
   return (
     <NativeBaseProvider>
       <ScrollView>
@@ -124,10 +170,10 @@ const RequestPage = ({navigation}) => {
             <SelectList
               placeholder={'옵션을 선택해주세요.'}
               search={false}
-              setSelected={setSelected}
+              setSelected={handleIsNeed}
               data={data_isNeedPurchase}
             />
-            {selected === 'true' && (
+            {isNeed === '구매 필요' && (
               <>
                 <Input
                   onChangeText={handlePurchaseCostChange}
@@ -144,7 +190,8 @@ const RequestPage = ({navigation}) => {
             </VStack>
             <TextArea
               placeholder={'원하시는 요청 내용을 입력해주세요'}
-              autoCompleteType="off"></TextArea>
+              autoCompleteType="off"
+              onChangeText={handleRequestChange}></TextArea>
             <Heading>수행지</Heading>
             <Box borderWidth={1} borderRadius="md" borderColor="gray.300">
               <GooglePlacesAutocomplete
@@ -153,8 +200,8 @@ const RequestPage = ({navigation}) => {
                 onPress={(data, details = null) => {
                   // 'details' is provided when fetchDetails = true
                   handleStartLocationSelect(data, details);
-                  console.log('Start Latitude:', startLatitude);
-                  console.log('Start Longitude:', startLongitude);
+                  console.log(details.formatted_address);
+                  // startLocName = details.formatted_address;
                 }}
                 query={{
                   key: 'AIzaSyCBTUMAu0Vl6TthTX6Hv7CT4Fdc-FOXDQ4',
@@ -170,8 +217,7 @@ const RequestPage = ({navigation}) => {
                 onPress={(data, details = null) => {
                   // 'details' is provided when fetchDetails = true
                   handleEndLocationSelect(data, details);
-                  console.log('End Latitude:', endLatitude);
-                  console.log('End Longitude:', endLongitude);
+                  console.log(details.formatted_address);
                 }}
                 query={{
                   key: 'AIzaSyCBTUMAu0Vl6TthTX6Hv7CT4Fdc-FOXDQ4',
@@ -183,6 +229,7 @@ const RequestPage = ({navigation}) => {
             <Input
               h={10}
               placeholder={'현관 비번 및 추가 정보를 입력해주세요.'}
+              onChangeText={handleOtherInfo}
             />
             <Heading>가격</Heading>
             <FormControl
@@ -210,7 +257,36 @@ const RequestPage = ({navigation}) => {
               </FormControl.HelperText>
             </FormControl>
 
-            <Button onPress={() => openModal('center')}>
+            <Button
+              onPress={() => {
+                if (
+                  isOrderCostValid &&
+                  startLatitude &&
+                  startLongitude &&
+                  endLatitude &&
+                  endLongitude
+                ) {
+                  // startLatitude, startLongitude, endLatitude, endLongitude가 존재하는지 확인
+                  openModal('center');
+                }
+              }}
+              disabled={
+                !isOrderCostValid ||
+                !startLatitude ||
+                !startLongitude ||
+                !endLatitude ||
+                !endLongitude
+              }
+              style={{
+                backgroundColor:
+                  isOrderCostValid &&
+                  startLatitude &&
+                  startLongitude &&
+                  endLatitude &&
+                  endLongitude
+                    ? '#34BEBA'
+                    : 'gray', // 비활성화 상태일 때 회색으로 설정
+              }}>
               <Text bold color={'white'} fontSize={'xl'}>
                 일거리 요청하기
               </Text>

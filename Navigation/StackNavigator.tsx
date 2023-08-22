@@ -24,7 +24,11 @@ const StackNavigator = () => {
         name="RequestPage"
         component={RequestPage}
       />
-      <Stack.Screen name="RequestDetail" component={RequestDetail} />
+      <Stack.Screen
+        name="RequestDetail"
+        component={RequestDetail}
+        options={{headerTitle: ''}}
+      />
     </Stack.Navigator>
   );
 };
