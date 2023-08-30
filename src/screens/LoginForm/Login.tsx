@@ -8,20 +8,19 @@ import {
     ScrollView,
     Pressable
 } from 'react-native';
-import{ useState } from 'react';
+import {useContext, useState} from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LoginStackParamList } from "../../types/navigation";
 
-import Register from "./Register";
-import Terms from "./Terms";
+
 const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
     const [userID, setUserID] = useState('');
     const [password, setPassword] = useState('');
 
-    const onSignInPressed = () => {
-        console.warn("onSignInPressed");
-    };
+
+    console.log("User ID:", userID);
+    console.log("Password:", password);
     return(
         <ScrollView style={styles.container}>
             <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
@@ -54,7 +53,7 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             </View>
 
             <View style={styles.otherButtonContainer}>
-                <Pressable onPress={onSignInPressed} style={styles.buttonLogin}>
+                <Pressable style={styles.buttonLogin}>
                     <Text>로그인</Text>
                 </Pressable>
             </View>

@@ -8,10 +8,12 @@ import PrimaryInfoBank from "./src/screens/JoinHelper/PrimaryInfoBank";
 import TermsModal from "./src/screens/JoinHelper/TermsModal";
 import JoinHelperStack from "./src/screens/JoinHelper/JoinHelperStack";
 import Map from "./src/Components/Map";
+import HelperHome from "./src/screens/HelperMode/HelperHome";
+import JobSelect from "./src/screens/Job/JobSelect";
+
 
 const App = () => {
-  return <LoginFormNavigator/>
-
+        return <JobSelect/>
 };
 
 export default App;
