@@ -7,7 +7,7 @@ import {
   Animated,
   useWindowDimensions,
 } from 'react-native';
-import {Center, VStack, Divider, HStack, Button} from 'native-base';
+import {VStack, Divider, HStack, Button} from 'native-base';
 import Home_FindTalent from './Home_FindTalent';
 import Home_RequestRealTime from './Home_RequestRealTime';
 import Home_Suggestions from './Home_Suggestions';
