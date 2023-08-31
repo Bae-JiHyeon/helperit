@@ -2,7 +2,6 @@ import React from 'react';
 import StackNavigator from './Navigation/StackNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import Home from './Home';
 
 const App = () => {
   return (
