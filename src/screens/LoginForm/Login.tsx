@@ -11,13 +11,39 @@ import {
 import {useContext, useState} from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LoginStackParamList } from "../../types/navigation";
+import { AuthContext } from "../../API/AuthContext";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
-    const [userID, setUserID] = useState('');
-    const [password, setPassword] = useState('');
+    const [userID, setUserID] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [isLoading, setIsLoading] = useState(false)
+    const [userInfo, setUserInfo] = useState({});
+    const val = useContext(AuthContext);
 
+    const login = (userID: string, password: string) => {
+        setIsLoading(true);
+
+        axios
+          .post(`server_URL/login`, {
+              userID,
+              password,
+          })
+          .then(res => {
+              let userInfo = res.data;
+              console.log(userInfo);
+              setUserInfo(userInfo);
+              AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+              setIsLoading(false);
+          })
+          .catch(e => {
+              console.log(`login error ${e}`);
+              setIsLoading(false);
+          });
+    };
 
     console.log("User ID:", userID);
     console.log("Password:", password);
@@ -53,7 +79,9 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             </View>
 
             <View style={styles.otherButtonContainer}>
-                <Pressable style={styles.buttonLogin}>
+                <Pressable
+                  style={styles.buttonLogin}
+                  onPress={()=>login}>
                     <Text>로그인</Text>
                 </Pressable>
             </View>
