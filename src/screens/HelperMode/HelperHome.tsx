@@ -41,17 +41,16 @@ const HelperMyPageStack = () =>{
     );
 }
 
+
 const HelperHome = () => {
     return(
-        <NavigationContainer>
-            <Tap.Navigator initialRouteName={"jobScreen"}>
+            <Tap.Navigator initialRouteName={"jobScreen"} screenOptions = {{ headerShown: false }}>
                 <Tap.Screen name="잡기" component={JobScreen}/>
                 <Tap.Screen name="진행중" component={ProceedingScreen}/>
                 <Tap.Screen name="재능등록" component={AbilityScreen}/>
                 <Tap.Screen name="헬퍼톡" component={HelperTalkScreen}/>
                 <Tap.Screen name="마이" component={HelperMyPageStack}/>
             </Tap.Navigator>
-        </NavigationContainer>
     );
 };
 

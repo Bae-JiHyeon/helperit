@@ -17,3 +17,8 @@ export type JoinHelperStackParamList={
     PrimaryInfoBank: undefined;
     PrimaryInfoSpec: undefined;
 };
+
+export type JobParamList={
+    JobSelect: undefined;
+    Working: undefined;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {Container, NativeBaseProvider, HStack, Image} from 'native-base';
-import TabNavigator from './Navigation/TabNavigator';
+import TabNavigator from './src/Navigation/TabNavigator';
 import {Dimensions} from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
@@ -15,7 +15,7 @@ function AppBar() {
             <StatusBar backgroundColor="#34BEBA" />
             <HStack alignItems="center" bg="#34BEBA" w={screenWidth}>
                 <Image
-                    source={require('./Assets/helperItLogo.png')}
+                    source={require('./src/Assets/helperItLogo.png')}
                     alt="helperItLogo"
                     size="md"
                     resizeMode="contain"

@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import RequestPage from '../UserMode_Screens/RequestPage';
 import RequestTutorial from '../UserMode_Screens/RequestTutorial';
-import Home from '../Home';
+import Home from '../../Home';
 import RequestDetail from '../UserMode_Screens/RequestDetail';
 
 const Stack = createStackNavigator();

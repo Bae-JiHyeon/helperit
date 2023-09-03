@@ -11,7 +11,7 @@ import {VStack, Divider, HStack, Button} from 'native-base';
 import Home_FindTalent from './Home_FindTalent';
 import Home_RequestRealTime from './Home_RequestRealTime';
 import Home_Suggestions from './Home_Suggestions';
-import Slider from '../src/Components/Slider';
+import Slider from '../Components/Slider';
 const WorkRequestTab = ({navigation}) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const {width: windowWidth} = useWindowDimensions();
