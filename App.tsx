@@ -5,6 +5,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import HelperHome from "./src/screens/HelperMode/HelperHome";
 import JobSelect from "./src/screens/Job/JobSelect";
 import Working from "./src/screens/Job/Working";
+import Test from "./src/Test";
 
 const App = () => {
         return (

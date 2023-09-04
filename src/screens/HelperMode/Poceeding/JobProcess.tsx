@@ -6,12 +6,7 @@ function JobProcess(){
     return(
         <ScrollView>
             <View style={{flex:1}}>
-                <ProcessPressable/>
-                <ProcessPressable/>
-                <ProcessPressable/>
-                <ProcessPressable/>
-                <ProcessPressable/>
-                <ProcessPressable/>
+              <ProcessPressable/>
             </View>
         </ScrollView>
  );
