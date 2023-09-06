@@ -6,12 +6,13 @@ import HelperHome from "./src/screens/HelperMode/HelperHome";
 import JobSelect from "./src/screens/Job/JobSelect";
 import Working from "./src/screens/Job/Working";
 import Test from "./src/Test";
+import LoginFormNavigator from "./src/screens/LoginForm/LoginFormNavigator";
 
 const App = () => {
         return (
             <SafeAreaProvider>
                     <NavigationContainer>
-                            <StackNavigator/>
+                            <LoginFormNavigator/>
                     </NavigationContainer>
             </SafeAreaProvider>
         );

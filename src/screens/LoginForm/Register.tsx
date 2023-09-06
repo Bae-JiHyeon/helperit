@@ -5,33 +5,35 @@ import {
     Text,
     TextInput,
     Dimensions,
-    ImageBackground,
-    TouchableOpacity,
-    SafeAreaView,
     ScrollView, Pressable
 } from "react-native";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRef} from 'react';
 import axios, {isAxiosError, AxiosResponse} from "axios";
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { LoginStackParamList } from "../../types/navigation";
+import { NativeBaseProvider, HStack, Radio } from "native-base";
 
 interface userData {
-    userID: string;
+    email: string;
     password: string;
-    confirmPass: string;
-    userName: string;
+    name: string;
+    age: number;
     nickname: string;
+    gender: string;
 }
-const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
+const Register = ({route}:NativeStackScreenProps<LoginStackParamList>) => {
+    const {ad} = route.params;
 
-    const [userID, setUserID] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPass, setConfirmPass]= useState<string>('');
-    const [userName, setUserName] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [age, setAge] = useState();
     const [nickname, setNickName] = useState<string>('');
+    const [gender, setGender] = useState('');
     const [errorMessage, setErrorMessage] =useState('');
     const [disabled, setDisabled] = useState(true);
     const [loading, setLoading]=useState()
@@ -40,19 +42,19 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
     useEffect(() => {
         setDisabled(
-            !(userID && password && confirmPass && userName && nickname && !errorMessage),
+            !(email && password && confirmPass && name && nickname && age && !errorMessage),
         );
-    }, [userID, password, confirmPass, userName, nickname, errorMessage]);
+    }, [email, password, confirmPass, name, nickname, age, errorMessage]);
 
     useEffect(() => {
             let _errorMassage: string = '';
-            if(!userID){
+            if(!email){
                 _errorMassage = '아이디 입력해주세요';
             } else if (password.length < 8){
                 _errorMassage = '8자 이상의 비밀번호를 입력해주세요';
             } else if (password !== confirmPass){
                 _errorMassage = '입력하신 비밀번호가 일치하지 않습니다';
-            } else if (!userName){
+            } else if (!name){
                 _errorMassage = '이름을 입력해주세요';
             } else if (!nickname){
                 _errorMassage = '별명을 입력해주세요';
@@ -60,53 +62,54 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                 _errorMassage ='';
             }
             setErrorMessage(_errorMassage);
-    }, [userID, password, confirmPass, userName, nickname]);
+    }, [email, password, confirmPass, name, nickname]);
 
     const SignUp = async () => {
         try {
-            const userData: userData = {
-                userID,
-                password,
-                confirmPass,
-                userName,
-                nickname,
+            const userData = {
+                nickname,email,name,password,age,gender,ad,
             };
 
-            const response = await axios.post('https://api.example.com/register', userData);
+            const response = await axios.post('http://10.0.2.2:8000/user/signup/', userData,
+              {headers: {
+                      'Content-Type': 'application/json'
+                  }});
 
-            console.log('User registered successfully:', response.data);
-
-            // 이후 필요한 동작 수행 (예: 회원가입 완료 후 화면 이동 등)
+            console.log('회원가입 성공:', response.data);
         } catch (error) {
-            console.error('Error registering user:', error);
+            console.error('회원가입 오류:', error);
         }
     };
 
-    console.log("User ID:", userID);
+    console.log("User ID:", email);
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPass);
-    console.log("User Name:", userName);
+    console.log("User Name:", name);
+    console.log("Age:", age);
     console.log("Nickname:", nickname);
+    console.log("Gender:", gender);
+    console.log("ad", ad);
     return(
-        <ScrollView style={styles.container}>
-            <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
-                <View style={styles.loginFormContainer}>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>아이디</Text>
-                        <TextInput
+      <NativeBaseProvider>
+          <ScrollView style={styles.container}>
+              <View style={{flex:1, alignItems: 'center', justifyContent:'center',}}>
+                  <View style={styles.loginFormContainer}>
+                      <View style={styles.inputContainer}>
+                          <Text style={styles.inputLabel}>아이디</Text>
+                          <TextInput
                             style={styles.input}
                             placeholder="아이디 입력"
-                            maxLength={15}
+                            maxLength={50}
                             autoCapitalize="none"
-                            value={userID}
-                            onChangeText={value =>setUserID(value)}
+                            value={email}
+                            onChangeText={value =>setEmail(value)}
                             keyboardType="email-address"
-                        />
-                    </View>
+                          />
+                      </View>
 
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>비밀번호</Text>
-                        <TextInput
+                      <View style={styles.inputContainer}>
+                          <Text style={styles.inputLabel}>비밀번호</Text>
+                          <TextInput
                             style={styles.input}
                             placeholder="비밀번호 입력"
                             maxLength={21}
@@ -116,12 +119,12 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             onChangeText={value => setPassword(value)}
                             secureTextEntry={true}
                             keyboardType="email-address"/>
-                    </View>
+                      </View>
 
 
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>비밀번호 재확인</Text>
-                        <TextInput
+                      <View style={styles.inputContainer}>
+                          <Text style={styles.inputLabel}>비밀번호 재확인</Text>
+                          <TextInput
                             style={styles.input}
                             placeholder="비밀번호 재확인"
                             maxLength={21}
@@ -131,24 +134,38 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             onChangeText={value => setConfirmPass(value)}
                             secureTextEntry
                             keyboardType="email-address"/>
-                    </View>
+                      </View>
+                      <HStack>
+                          <View >
+                              <Text style={styles.inputLabel}>이름</Text>
+                              <TextInput
+                                style={[styles.input,{width: 150},{marginEnd:50}]}
+                                placeholder="이름 입력"
+                                maxLength={5}
+                                autoCapitalize="none"
+                                value={name}
+                                onChangeText={value =>setName(value)}
+                                keyboardType="email-address"
+                              />
+                          </View>
+                          <View >
+                              <Text style={[styles.inputLabel, {width: 150}]}>나이</Text>
+                              <TextInput
+                                style={styles.input}
+                                placeholder="나이 입력"
+                                maxLength={3}
+                                autoCapitalize="none"
+                                value={age}
+                                onChangeText={value =>setAge(value)}
+                                keyboardType="number-pad"
+                              />
+                          </View>
+                      </HStack>
 
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>이름</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="이름 입력"
-                            maxLength={5}
-                            autoCapitalize="none"
-                            value={userName}
-                            onChangeText={value =>setUserName(value)}
-                            keyboardType="email-address"
-                        />
-                    </View>
 
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>별명</Text>
-                        <TextInput
+                      <View style={styles.inputContainer}>
+                          <Text style={styles.inputLabel}>별명</Text>
+                          <TextInput
                             style={styles.input}
                             placeholder="별명 입력"
                             maxLength={10}
@@ -156,20 +173,38 @@ const Register = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                             value={nickname}
                             onChangeText={value =>setNickName(value)}
                             keyboardType="email-address"
-                        />
-                    </View>
-                </View>
-            </View>
+                          />
+                      </View>
+                      <View style={styles.inputContainer}>
+                          <Text style={styles.inputLabel}>성별</Text>
+                          <Radio.Group name="myRadioGroup" accessibilityLabel="favorite number" value={gender} onChange={nextValue => {
+                              setGender(nextValue);
+                          }}>
+                              <HStack space={2}>
+                                  <Radio shadow={2} value="m" my={2}>
+                                      <Text>남자</Text>
+                                  </Radio>
+                                  <Radio shadow={2} value="f" my={2}>
+                                      <Text>여자</Text>
+                                  </Radio>
+                              </HStack>
+                          </Radio.Group>
+                      </View>
+
+                  </View>
+              </View>
 
 
-            <Pressable
+              <Pressable
                 style={styles.buttonLogin}
                 onPress={SignUp}
                 disabled={disabled}>
-                <Text style={styles.otherText}>회원가입</Text>
-            </Pressable>
+                  <Text style={styles.otherText}>회원가입</Text>
+              </Pressable>
 
-        </ScrollView>
+          </ScrollView>
+      </NativeBaseProvider>
+
     )
 }
 

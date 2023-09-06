@@ -28,13 +28,14 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
         setIsLoading(true);
 
         axios
-          .post(`server_URL/login`, {
+          .post(`http://10.0.2.2:8000/user/api-auth/login/`, {
               userID,
               password,
           })
           .then(res => {
               let userInfo = res.data;
               console.log(userInfo);
+              userInfo = removeCircularReferences(userInfo)
               setUserInfo(userInfo);
               AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
               setIsLoading(false);
@@ -44,6 +45,12 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
               setIsLoading(false);
           });
     };
+    function removeCircularReferences(obj) {
+        // obj를 처리하여 원형 참조를 제거하거나 변환하는 로직 추가
+        // 예: obj에서 원형 참조를 찾아서 적절한 처리 수행
+        // 원형 참조가 없으면 obj를 그대로 반환
+        return obj;
+    }
 
     console.log("User ID:", userID);
     console.log("Password:", password);
@@ -81,7 +88,7 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             <View style={styles.otherButtonContainer}>
                 <Pressable
                   style={styles.buttonLogin}
-                  onPress={()=>login}>
+                  onPress={login}>
                     <Text>로그인</Text>
                 </Pressable>
             </View>
