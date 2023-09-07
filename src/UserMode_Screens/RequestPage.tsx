@@ -18,6 +18,7 @@ import {
 import {SelectList} from 'react-native-dropdown-select-list';
 import {ScrollView, TextInput} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import axios from "axios";
 
 const RequestPage = ({navigation}) => {
     const openModal = placement => {
@@ -47,8 +48,7 @@ const RequestPage = ({navigation}) => {
             otherInfo,
         });
 
-        /*
-        일거리 요청 누를 시 정보를 다음 페이지가 아닌 백엔드로 POST 요청을 보내는 코드.
+        {/*일거리 요청 누를 시 정보를 다음 페이지가 아닌 백엔드로 POST 요청을 보내는 코드.*/}
         const apiUrl = '백엔드 API의 URL';
 
         // axios를 사용하여 POST 요청 보내기
@@ -63,7 +63,6 @@ const RequestPage = ({navigation}) => {
             console.error('요청이 실패하였습니다.', error);
             // 에러 처리 로직 추가
           });
-         */
     };
 
     const [otherInfo, setOtherInfo] = useState('');

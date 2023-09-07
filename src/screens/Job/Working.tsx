@@ -22,11 +22,11 @@ const JobSelect=({navigation})=>{
   const [purchaseCost, setPurchaseCost] = useState(0);
 
   const getAPI = () =>{
-    axios.get('https://jsonplaceholder.typicode.com/users/1')
+    axios.get('https://10.0.2.2:8000/request/list')
       .then(res => {
         const resData = res.data;
-        const userName = resData.name;
-        const userPurchaseCost = resData.address.zipcode;
+        const userName = resData.id;
+        const userPurchaseCost = resData.purchaseFee;
 
         setName(userName);
         setPurchaseCost(userPurchaseCost);
@@ -60,7 +60,7 @@ const JobSelect=({navigation})=>{
           </Box>
           <HStack>
             <Heading paddingLeft={5} size={'sm'}>
-              구매대행 해주세요 {/*카테고리 데이터 추가*/}
+              구매대행 해주세요 {purchaseCost}
             </Heading>
             <Spacer />
             <TouchableOpacity>
@@ -147,7 +147,7 @@ const JobSelect=({navigation})=>{
         </Text>
         <Box w={'100%'} alignItems={'center'}>
           <TextArea editable={false} w={'90%'} h={'50'}>
-            {/*axios get 비용*/}
+            {purchaseCost}
           </TextArea>
         </Box>
         <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>

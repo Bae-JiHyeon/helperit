@@ -20,18 +20,18 @@ interface userData {
     email: string;
     password: string;
     name: string;
-    age: number;
     nickname: string;
     gender: string;
 }
 const Register = ({route}:NativeStackScreenProps<LoginStackParamList>) => {
     const {ad} = route.params;
 
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPass, setConfirmPass]= useState<string>('');
     const [name, setName] = useState<string>('');
-    const [age, setAge] = useState();
+    const [age, setAge] = useState<number>();
     const [nickname, setNickName] = useState<string>('');
     const [gender, setGender] = useState('');
     const [errorMessage, setErrorMessage] =useState('');
@@ -64,22 +64,30 @@ const Register = ({route}:NativeStackScreenProps<LoginStackParamList>) => {
             setErrorMessage(_errorMassage);
     }, [email, password, confirmPass, name, nickname]);
 
-    const SignUp = async () => {
-        try {
-            const userData = {
-                nickname,email,name,password,age,gender,ad,
-            };
+    const SignUp =  () => {
+        const ageAsNumber = parseInt(age, 10);
+        const userData = {nickname,email,name,password,age:ageAsNumber,gender,ad};
+        const apiUrl = 'http://10.0.2.2:8000/user/signup/';
 
-            const response = await axios.post('http://10.0.2.2:8000/user/signup/', userData,
-              {headers: {
-                      'Content-Type': 'application/json'
-                  }});
-
-            console.log('회원가입 성공:', response.data);
-        } catch (error) {
-            console.error('회원가입 오류:', error);
-        }
+        // axios를 사용하여 POST 요청 보내기
+        axios.post(apiUrl, JSON.stringify(userData),{
+            headers:{
+                'Content-Type': 'application/json',
+            }
+        })
+          .then(response => {
+              // 요청이 성공한 경우에 수행할 동작
+              console.log('요청이 성공하였습니다.', response.data);
+          })
+          .catch(error => {
+              // 요청이 실패한 경우에 수행할 동작
+              console.error('요청이 실패하였습니다.', error);
+              // 에러 처리 로직 추가
+          });
+        console.log(JSON.stringify(userData, null, 2));
     };
+
+
 
     console.log("User ID:", email);
     console.log("Password:", password);
@@ -207,6 +215,7 @@ const Register = ({route}:NativeStackScreenProps<LoginStackParamList>) => {
 
     )
 }
+
 
 
 const styles = StyleSheet.create({
