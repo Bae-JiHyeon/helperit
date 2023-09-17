@@ -49,7 +49,20 @@ const RequestPage = ({navigation}) => {
         });
 
         {/*일거리 요청 누를 시 정보를 다음 페이지가 아닌 백엔드로 POST 요청을 보내는 코드.*/}
-        const apiUrl = '백엔드 API의 URL';
+        const requestData = [
+            selectedTiming, //즉시, 나중
+            startLatitude, //지도에 쓸 경유지 위도
+            startLongitude, //경유지 경도
+            endLatitude, //도착지 위도
+            endLongitude, //도착지 경도
+            totalCost, //일거리 요청 비용
+            purchaseFee, //물품 구매 비용
+            request, //일거리 요청 내용
+            isNeed, //물품 구매 필요 여부
+            startLocName,
+            endLocName,
+            otherInfo,]
+        const apiUrl = 'http://10.0.2.2:8000/request/list';
 
         // axios를 사용하여 POST 요청 보내기
         axios.post(apiUrl, requestData)

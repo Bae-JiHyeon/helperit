@@ -15,7 +15,8 @@ import {
     VStack
 } from "native-base";
 
-const JobSelect=({navigation})=>{
+const JobSelect=({navigation, route})=>{
+    const { post } = route.params;
     return(
         <NativeBaseProvider>
             <MapView
@@ -39,7 +40,7 @@ const JobSelect=({navigation})=>{
                     </Box>
                     <HStack>
                         <Heading paddingLeft={5} size={'sm'}>
-                            구매대행 해주세요 {/*카테고리 데이터 추가*/}
+                            {post.category}
                         </Heading>
                         <Spacer />
                         <TouchableOpacity>
@@ -50,7 +51,7 @@ const JobSelect=({navigation})=>{
                         <Text>
                             수행일시 {/*등록 날짜 데이터 추가*/} {/*수행 일시 데이터 추가*/}{'\n'}
                             <Text color="red.500">
-                                헬퍼 비용 {/*비용 데이터 추가*/}
+                                헬퍼 비용 {post.total_money} 원
                             </Text>
                         </Text>
                     </HStack>
@@ -61,7 +62,7 @@ const JobSelect=({navigation})=>{
                 </Text>
                 <Box w={'100%'} alignItems={'center'}>
                     <TextArea editable={false} w={'90%'} h={'50'}>
-                        {/*axios get 비용*/}
+                        {post.goods_money}
                     </TextArea>
                 </Box>
                 <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>
@@ -69,7 +70,7 @@ const JobSelect=({navigation})=>{
                 </Text>
                 <Box w={'100%'} alignItems={'center'}>
                     <TextArea editable={false} w={'90%'} h={'50'}>
-                        {/*axios get 비용*/}
+                        {post.request}
                     </TextArea>
                 </Box>
                 <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>
@@ -77,7 +78,7 @@ const JobSelect=({navigation})=>{
                 </Text>
                 <Box w={'100%'} alignItems={'center'}>
                     <TextArea editable={false} w={'90%'} h={'50'}>
-                        {/*axios get 경유지 주소*/}
+                        {post.request_place}
                     </TextArea>
                 </Box>
                 <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>
@@ -85,7 +86,7 @@ const JobSelect=({navigation})=>{
                 </Text>
                 <Box w={'100%'} alignItems={'center'}>
                     <TextArea editable={false} w={'90%'} h={'50'}>
-                        {/*axios get 도착지 주소*/}
+                        {post.destination}
                     </TextArea>
                 </Box>
                 <Box alignItems="center"

@@ -2,30 +2,37 @@ import React, { useEffect, useState } from "react";
 import {View,  FlatList,StyleSheet, StatusBar} from 'react-native';
 import { Text, Avatar, Box, Heading, HStack, Spacer, VStack, NativeBaseProvider } from "native-base";
 import axios from "axios/index";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Home_FindTalent = () => {
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    // 외부 API에서 데이터를 가져옵니다.
-    axios.get('http://10.0.2.2:8000/request/list')
-      .then((response) => {
-        setList(response.data);
-      })
-      .catch((error) => {
-        console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
-      });
-  }, []);
-    // 데이터를 id 내림차순으로 정렬합니다.
-    const sortedData = list.slice().sort((a, b) => b.id - a.id);
-    const slicedData = sortedData.slice(0, 4);
+  const fetchData = async () => {
+    try {
+      const res = await axios.get('http://10.0.2.2:8000/request/list');
+      setList(res.data);
+    } catch (error) {
+      console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
+    }
+  };
+
+  //화면 이동시 데이터를 GET
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+    }, [])
+  );
+  // 데이터를 id 내림차순으로 정렬(최신화)
+  const sortedData = list.slice().sort((a, b) => b.id - a.id);
+  const slicedData = sortedData.slice(0, 4);
+
 
   return (
     <NativeBaseProvider>
       <Box>
         <HStack>
           <Heading fontSize="xl" p="4" pb="3">
-            헬퍼 재능 찾기
+            실시간 일거리 요청
           </Heading>
           <Spacer />
           <Box paddingRight={7} justifyContent={'center'}>

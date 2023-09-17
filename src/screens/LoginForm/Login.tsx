@@ -18,7 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
-    const [userID, setUserID] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false)
     const [userInfo, setUserInfo] = useState({});
@@ -29,7 +29,7 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
         axios
           .post(`http://10.0.2.2:8000/user/api-auth/login/`, {
-              userID,
+              email,
               password,
           })
           .then(res => {
@@ -52,7 +52,7 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
         return obj;
     }
 
-    console.log("User ID:", userID);
+    console.log("User ID:", email);
     console.log("Password:", password);
     return(
         <ScrollView style={styles.container}>
@@ -62,10 +62,10 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
                         <TextInput
                             style={styles.input}
                             placeholder="아이디 입력"
-                            maxLength={15}
+                            maxLength={50}
                             autoCapitalize="none"
-                            value={userID}
-                            onChangeText={val =>setUserID(val)}
+                            value={email}
+                            onChangeText={val =>setEmail(val)}
                             keyboardType="email-address"
                         />
                     </View>

@@ -8,11 +8,12 @@ import Working from "./src/screens/Job/Working";
 import Test from "./src/Test";
 import LoginFormNavigator from "./src/screens/LoginForm/LoginFormNavigator";
 
+
 const App = () => {
         return (
             <SafeAreaProvider>
                     <NavigationContainer>
-                            <LoginFormNavigator/>
+                            <StackNavigator/>
                     </NavigationContainer>
             </SafeAreaProvider>
         );

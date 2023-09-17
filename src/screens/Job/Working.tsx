@@ -16,7 +16,7 @@ import {
 } from "native-base";
 import axios from "axios";
 
-const JobSelect=({navigation})=>{
+const Working=({navigation})=>{
   const [data, setData] = useState([]);
   const [name, setName] = useState('');
   const [purchaseCost, setPurchaseCost] = useState(0);
@@ -243,4 +243,4 @@ const styles =StyleSheet.create({
     flex:0.35,
   }
 })
-export default JobSelect
+export default Working
