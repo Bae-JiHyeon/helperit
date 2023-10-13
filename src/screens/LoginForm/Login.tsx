@@ -20,40 +20,14 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [isLoading, setIsLoading] = useState(false)
     const [userInfo, setUserInfo] = useState({});
-    const val = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
 
-    const login = (userID: string, password: string) => {
-        setIsLoading(true);
 
-        axios
-          .post(`http://10.0.2.2:8000/user/api-auth/login/`, {
-              email,
-              password,
-          })
-          .then(res => {
-              let userInfo = res.data;
-              console.log(userInfo);
-              userInfo = removeCircularReferences(userInfo)
-              setUserInfo(userInfo);
-              AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-              setIsLoading(false);
-          })
-          .catch(e => {
-              console.log(`login error ${e}`);
-              setIsLoading(false);
-          });
-    };
-    function removeCircularReferences(obj) {
-        // obj를 처리하여 원형 참조를 제거하거나 변환하는 로직 추가
-        // 예: obj에서 원형 참조를 찾아서 적절한 처리 수행
-        // 원형 참조가 없으면 obj를 그대로 반환
-        return obj;
-    }
 
-    console.log("User ID:", email);
+    console.log("email:", email);
     console.log("Password:", password);
+    console.log("token", userInfo)
     return(
         <ScrollView style={styles.container}>
             <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>

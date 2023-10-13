@@ -10,13 +10,11 @@ import PrimaryInfoSpec from "./PrimaryInfoSpec";
 const Stack = createStackNavigator<JoinHelperStackParamList>();
 const JoinHelperStack = () =>{
     return(
-        <NavigationContainer>
             <Stack.Navigator initialRouteName={"PrimaryInfo"} screenOptions = {{ headerShown: false }}>
                 <Stack.Screen name="PrimaryInfo" component={PrimaryInfo}/>
                 <Stack.Screen name="PrimaryInfoBank" component={PrimaryInfoBank}/>
                 <Stack.Screen name="PrimaryInfoSpec" component={PrimaryInfoSpec}/>
             </Stack.Navigator>
-        </NavigationContainer>
     );
 }
 export default JoinHelperStack;

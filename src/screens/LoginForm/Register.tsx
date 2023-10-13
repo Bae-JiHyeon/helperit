@@ -67,7 +67,7 @@ const Register = ({route}:NativeStackScreenProps<LoginStackParamList>) => {
     const SignUp =  () => {
         const ageAsNumber = parseInt(age, 10);
         const userData = {nickname,email,name,password,age:ageAsNumber,gender,ad};
-        const apiUrl = 'http://10.0.2.2:8000/user/signup/';
+        const apiUrl = 'http://10.0.2.2:8000/accounts/list';
 
         // axios를 사용하여 POST 요청 보내기
         axios.post(apiUrl, JSON.stringify(userData),{

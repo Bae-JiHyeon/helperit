@@ -7,15 +7,18 @@ import JobSelect from "./src/screens/Job/JobSelect";
 import Working from "./src/screens/Job/Working";
 import Test from "./src/Test";
 import LoginFormNavigator from "./src/screens/LoginForm/LoginFormNavigator";
+import { AuthProvider } from "./src/API/AuthContext";
 
 
 const App = () => {
         return (
+          <AuthProvider>
             <SafeAreaProvider>
-                    <NavigationContainer>
-                            <StackNavigator/>
-                    </NavigationContainer>
+              <NavigationContainer>
+                <LoginFormNavigator/>
+              </NavigationContainer>
             </SafeAreaProvider>
+          </AuthProvider>
         );
 };
 

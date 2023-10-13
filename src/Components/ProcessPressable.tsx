@@ -9,7 +9,7 @@ const ProcessPressable: React.FC = () => {
 
     useEffect(() => {
         // 외부 API에서 데이터를 가져옵니다.
-        axios.get('https://jsonplaceholder.typicode.com/users')
+        axios.get('http://10.0.2.2:8000/request/list')
           .then((response) => {
               setUsers(response.data);
           })
@@ -17,6 +17,9 @@ const ProcessPressable: React.FC = () => {
               console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
           });
     }, []);
+
+    const sortedData = users.slice().sort((a, b) => b.id - a.id);
+    const slicedData = sortedData.slice(0, 4);
 
     const renderItem = ({ item }) => {
         return (
@@ -28,7 +31,7 @@ const ProcessPressable: React.FC = () => {
                               <Badge colorScheme="darkBlue" _text={{
                                   color: "white"
                               }} variant="solid" rounded="4">
-                                  {item.name}
+                                  {item.id}
                               </Badge>
                               <Spacer />
                               <Text fontSize={10} color="coolGray.800">
@@ -36,10 +39,9 @@ const ProcessPressable: React.FC = () => {
                               </Text>
                           </HStack>
                           <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
-                              {item.address.city}
+                              {item.request_place}
                           </Text>
                           <Text mt="2" fontSize="sm" color="coolGray.700">
-                              {item.company.catchPhrase}
                           </Text>
                           <Flex>
                               <Text mt="2" fontSize={12} fontWeight="medium" color="darkBlue.600">
@@ -55,7 +57,7 @@ const ProcessPressable: React.FC = () => {
 
     return (
       <FlatList
-        data={users}
+        data={slicedData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />

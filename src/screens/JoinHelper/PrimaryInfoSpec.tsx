@@ -1,11 +1,12 @@
 //헬퍼 전문분야, 이동 수단 선택
 import React, {useState} from "react";
-import {Dimensions, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
+import { Button, Dimensions, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import BankList from "../../Components/BankList";
 import {Checkbox, HStack, NativeBaseProvider, VStack} from "native-base";
 import {JoinHelperStackParamList} from "../../types/navigation";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import TermsModal from "./TermsModal";
+import Home from "../../../Home";
 
 const onSignInPressed = () => {
     console.warn("onSignInPressed");
@@ -22,26 +23,28 @@ const PrimaryInfoSpec=({navigation}:NativeStackScreenProps<JoinHelperStackParamL
                 <View style={styles.item2}>
                     <Text style={styles.BoldText}>*전문분야</Text>
                     <VStack>
-                        <Checkbox value="Cleaning" style={styles.checkBox}>청소</Checkbox>
-                        <Checkbox value="Trash" style={styles.checkBox}>분리수거 대행</Checkbox>
-                        <Checkbox value="Delivery" style={styles.checkBox}>배달</Checkbox>
-                        <Checkbox value="Etc" style={styles.checkBox}>기타 전문직</Checkbox>
-                        <Checkbox value="Online" style={styles.checkBox}>온라인(개발자, 마케팅, 디자인 등)</Checkbox>
+                        <Checkbox value="Cleaning" style={styles.checkBox}><Text>청소</Text></Checkbox>
+                        <Checkbox value="Trash" style={styles.checkBox}><Text>분리수거대행</Text></Checkbox>
+                        <Checkbox value="Delivery" style={styles.checkBox}><Text>배달</Text></Checkbox>
+                        <Checkbox value="Etc" style={styles.checkBox}><Text>기타 전문직</Text></Checkbox>
+                        <Checkbox value="Online" style={styles.checkBox}><Text>온라인(개발자, 마케팅, 디자인 등)</Text></Checkbox>
                     </VStack>
                 </View>
                 <View style={styles.item3}>
                     <Text style={styles.BoldText}>*이동 수단</Text>
                     <HStack style={{padding: 10}}>
-                        <Checkbox value="Cleaning" style={styles.checkBox}>자전거</Checkbox>
-                        <Checkbox value="Trash" style={styles.checkBox}>킥보드</Checkbox>
-                        <Checkbox value="Delivery" style={styles.checkBox}>오토바이</Checkbox>
+                        <Checkbox value="Cleaning" style={styles.checkBox}><Text>자전거</Text></Checkbox>
+                        <Checkbox value="Trash" style={styles.checkBox}><Text>킥보드</Text></Checkbox>
+                        <Checkbox value="Delivery" style={styles.checkBox}><Text>오토바이</Text></Checkbox>
                     </HStack>
                     <HStack style={{padding: 10}}>
-                        <Checkbox value="Cleaning" style={styles.checkBox}>승용차</Checkbox>
-                        <Checkbox value="Trash" style={styles.checkBox}>화물차</Checkbox>
-                        <Checkbox value="Delivery" style={styles.checkBox}>도보</Checkbox>
+                        <Checkbox value="Cleaning" style={styles.checkBox}><Text>승용차</Text></Checkbox>
+                        <Checkbox value="Trash" style={styles.checkBox}><Text>화물차</Text></Checkbox>
+                        <Checkbox value="Delivery" style={styles.checkBox}><Text>도보</Text></Checkbox>
                     </HStack>
-                    <TermsModal/> {/* 저장을 누리면 나오는 모달 */}
+                    <View>
+                        <Button title={'저장'} onPress={()=>{/*모달 띄우기*/}}></Button>
+                    </View>
                 </View>
                 <View style={{height:65}}>
                     <View style={styles.naviBar}>

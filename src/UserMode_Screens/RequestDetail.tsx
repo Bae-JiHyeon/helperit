@@ -28,7 +28,7 @@ import {
     VStack,
 } from 'native-base';
 
-const RequestDetailScreen = ({route}) => {
+const MapScreen = () => {
     const {
         totalCost,
         startLatitude,
@@ -311,4 +311,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default RequestDetailScreen;
+export default MapScreen;
