@@ -40,7 +40,6 @@ export const AuthProvider = ({children}) => {
   const login = (email: string, password: string) => {
     const userData = { email, password };
     const apiurl = 'http://10.0.2.2:8000/accounts/login/';
-    setIsLoading(true);
 
     const cleanedUserData = removeCircularReferences(userData);
 
@@ -54,12 +53,10 @@ export const AuthProvider = ({children}) => {
         let userInfo = res.data;
         setUserInfo(userInfo);
         console.log(userInfo);
-        AsyncStorage.setItem('userInfo', userInfo);
-        setIsLoading(false);
+        AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
       })
       .catch((e) => {
         console.log(`login error ${e}`);
-        setIsLoading(false);
       });
     console.log(userData);
   };
@@ -78,31 +75,27 @@ export const AuthProvider = ({children}) => {
 
     return JSON.parse(JSON.stringify(obj, replacer));
   }
-  useEffect(() => {
-    // 최초 렌더링 이후 한 번만 호출됨
-    isLoggedIn();
-  }, []);
 
   const logout = () => {
-    setIsLoading(true);
+    const apiurl = 'http://10.0.2.2:8000/accounts/logout/'
 
     axios
       .post(
-        `${BASE_URL}/logout`,
+        apiurl,
         {},
         {
-          headers: {Authorization: `Bearer ${userInfo.access_token}`},
+          headers: {Authorization: `Bearer ${userInfo.token}`},
         },
       )
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
         AsyncStorage.removeItem('userInfo');
         setUserInfo({});
-        setIsLoading(false);
       })
       .catch(e => {
+        AsyncStorage.removeItem('userInfo');
+        AsyncStorage.clear();
         console.log(`logout error ${e}`);
-        setIsLoading(false);
       });
   };
 

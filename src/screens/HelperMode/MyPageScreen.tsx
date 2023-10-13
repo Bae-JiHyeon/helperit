@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, StyleSheet, Text, Touchable, Pressable, Alert} from "react-native";
+import React, { useContext } from "react";
+import { View, StyleSheet, Text, Touchable, Pressable, Alert, Button } from "react-native";
 import {NativeBaseProvider,Avatar, HStack, VStack} from "native-base";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,9 +8,11 @@ import {NativeStackScreenProps} from "@react-navigation/native-stack";
 
 
 import MyHelperInfo from "../../Components/MyHelperInfo";
+import { AuthContext } from "../../API/AuthContext";
 
 
 const MyPageScreen = ({navigation}:NativeStackScreenProps<HelperMyPageStackParamList>) => {
+    const {userInfo, logout} = useContext(AuthContext);
     const onSignUpPressed = () => {
         console.warn("정산받기 동작");
     };
@@ -63,13 +65,12 @@ const MyPageScreen = ({navigation}:NativeStackScreenProps<HelperMyPageStackParam
                             <Text style={styles.MenuText}>고객에게 온 후기</Text>
                         </Pressable>
                         <Pressable>
-                            <Text style={styles.MenuText}>로그아웃</Text>
-                        </Pressable>
-                        <Pressable>
                             <Text style={styles.MenuText}>자주 묻는 질문</Text>
                         </Pressable>
+
                     </View>
                 </View>
+                <Button title={"로그아웃"} onPress= {logout}/>
             </View>
         </NativeBaseProvider>
     );

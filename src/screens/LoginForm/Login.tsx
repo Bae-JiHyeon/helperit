@@ -6,8 +6,8 @@ import {
     TextInput,
     Dimensions,
     ScrollView,
-    Pressable
-} from 'react-native';
+    Pressable, Button
+} from "react-native";
 import {useContext, useState} from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LoginStackParamList } from "../../types/navigation";
@@ -21,13 +21,14 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [userInfo, setUserInfo] = useState({});
-    const {login} = useContext(AuthContext);
+    const {login, userData} = useContext(AuthContext);
 
 
 
     console.log("email:", email);
     console.log("Password:", password);
-    console.log("token", userInfo)
+    console.log("token", userInfo);
+    console.log("데이터", userData);
     return(
         <ScrollView style={styles.container}>
             <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
@@ -60,11 +61,13 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             </View>
 
             <View style={styles.otherButtonContainer}>
-                <Pressable
+                <Button
+                  title="로그인"
                   style={styles.buttonLogin}
-                  onPress={login}>
-                    <Text>로그인</Text>
-                </Pressable>
+                  onPress={() => {
+                      login(email, password);
+                  }}
+                />
             </View>
 
             <View style={styles.otherButtonContainer}>

@@ -12,13 +12,13 @@ import { AuthProvider } from "./src/API/AuthContext";
 
 const App = () => {
         return (
-          <AuthProvider>
-            <SafeAreaProvider>
-              <NavigationContainer>
-                <LoginFormNavigator/>
-              </NavigationContainer>
-            </SafeAreaProvider>
-          </AuthProvider>
+          <NavigationContainer>
+            <AuthProvider>
+              <SafeAreaProvider>
+                <StackNavigator/>
+              </SafeAreaProvider>
+            </AuthProvider>
+          </NavigationContainer>
         );
 };
 
