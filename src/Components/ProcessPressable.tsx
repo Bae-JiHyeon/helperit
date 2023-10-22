@@ -35,7 +35,7 @@ const ProcessPressable: React.FC = () => {
                               </Badge>
                               <Spacer />
                               <Text fontSize={10} color="coolGray.800">
-                                  1 month ago
+
                               </Text>
                           </HStack>
                           <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">

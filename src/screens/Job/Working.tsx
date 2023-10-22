@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
-import MapView, {PROVIDER_GOOGLE}from "react-native-maps";
+import { View, StyleSheet, ScrollView, TouchableOpacity, Image, Button } from "react-native";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import {
   Badge,
   Box,
-  Button,
   Heading,
   HStack,
   NativeBaseProvider,
@@ -12,7 +11,8 @@ import {
   Stack,
   Text,
   TextArea,
-  VStack
+  VStack,
+  Button as NBButton
 } from "native-base";
 import axios from "axios";
 
@@ -20,21 +20,45 @@ const Working=({navigation})=>{
   const [data, setData] = useState([]);
   const [name, setName] = useState('');
   const [purchaseCost, setPurchaseCost] = useState(0);
+  const [category, setCategory] = useState('');
 
-  const getAPI = () =>{
-    axios.get('https://10.0.2.2:8000/request/list')
-      .then(res => {
-        const resData = res.data;
-        const userName = resData.id;
-        const userPurchaseCost = resData.purchaseFee;
+  const [buttonText1, setButtonText1] = useState('시작'); // 첫 번째 버튼의 초기 텍스트
+  const [buttonText2, setButtonText2] = useState('수행중');
+  const [buttonText3, setButtonText3] = useState('완료'); // 첫 번째 버튼의 초기 텍스트
+  const [buttonText4, setButtonText4] = useState('완료 확인 요청');
 
-        setName(userName);
-        setPurchaseCost(userPurchaseCost);
-          });
+  {/*
+    const getAPI = () => {
+      axios.get("https://10.0.2.2:8000/request/list")
+        .then(res => {
+          const resData = res.data;
+          const userName = resData.id;
+          const userPurchaseCost = resData.purchaseFee;
+          const userCategory = resData.category;
+
+          setName(userName);
+          setPurchaseCost(userPurchaseCost);
+          setCategory(userCategory);
+        });
+    };
+    useEffect(() => {
+      getAPI();
+    }, []);
+  */}
+  const changeText1 = () => {
+    setButtonText1('완료'); // 첫 번째 버튼의 텍스트 변경
   };
-  useEffect(() => {
-    getAPI();
-  }, []);
+
+  const changeText2 = () => {
+    setButtonText2('수행 완료'); // 두 번째 버튼의 텍스트 변경
+  };
+  const changeText3 = () => {
+    setButtonText3('완료'); // 세 번째 버튼의 텍스트 변경
+  };
+
+  const changeText4 = () => {
+    setButtonText4('고객 확인 요청중'); // 네 번째 버튼의 텍스트 변경
+  };
 
 
   return(
@@ -48,6 +72,20 @@ const Working=({navigation})=>{
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}>
+        <Marker
+          coordinate={{latitude: 35.1208085, longitude: 129.1012215}} // 임의로 동명대로 설정, 추후 userLatitude, userLongitude로 바꾸기
+          title="내 위치"
+        />
+        <Marker
+          coordinate={{latitude: 35.1208085, longitude: 129.1012215}}
+          title="출발지"
+          description="출발지"
+        />
+        <Marker
+          coordinate={{latitude: 35.1397716, longitude: 129.0984966}}
+          title="도착지"
+          description="도착지"
+        />
       </MapView>
       <ScrollView style={styles.container}>
         <VStack alignItems={'flex-start'}>
@@ -60,7 +98,7 @@ const Working=({navigation})=>{
           </Box>
           <HStack>
             <Heading paddingLeft={5} size={'sm'}>
-              구매대행 해주세요 {purchaseCost}
+              일거리 요청
             </Heading>
             <Spacer />
             <TouchableOpacity>
@@ -86,9 +124,7 @@ const Working=({navigation})=>{
                 style={{width: 70, height: 70}}
               />
             </Box>
-            <Button backgroundColor={'#0066ff'}>
-              <Text color={'#fff'}>진행 전</Text>
-            </Button>
+            <Button title={buttonText1} onPress={changeText1}/>
           </VStack>
           <Box justifyContent={'center'}>
             <Image
@@ -105,9 +141,7 @@ const Working=({navigation})=>{
                 style={{width: 70, height: 70}}
               />
             </Box>
-            <Button backgroundColor={'#0066ff'}>
-              <Text color={'#fff'}>수행확인</Text>
-            </Button>
+            <Button title={buttonText2} onPress={changeText2}/>
           </VStack>
           <Box justifyContent={'center'}>
             <Image
@@ -124,46 +158,45 @@ const Working=({navigation})=>{
                 style={{width: 70, height: 70}}
               />
             </Box>
-            <Button backgroundColor={'#0066ff'}>
-              <Text color={'#fff'}>완료확인</Text>
-            </Button>
+            <Button title={buttonText3} onPress={changeText3}/>
           </VStack>
         </HStack>
         <Box w={'100%'} alignItems={'center'}>
-          <Button w={'90%'} backgroundColor={'#34BEBA'}>
-            <Text color={'#fff'}>완료 확인</Text>
-          </Button>
+          <TouchableOpacity onPress={changeText4}
+                            style={{ width: '80%',padding: 10, borderRadius: 6, backgroundColor: '#34BEBA'}}>
+            <Text style={{textAlign: 'center'}}>{buttonText4}</Text>
+          </TouchableOpacity>
         </Box>
         <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>
           물품 음식 비용
         </Text>
         <Box w={'100%'} alignItems={'center'}>
-          <TextArea editable={false} w={'90%'} h={'50'}>
-            {purchaseCost}
+          <TextArea editable={false} w={'90%'} h={'60'}>
+            0
           </TextArea>
         </Box>
         <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>
           일거리 요청 내용
         </Text>
         <Box w={'100%'} alignItems={'center'}>
-          <TextArea editable={false} w={'90%'} h={'50'}>
-            {purchaseCost}
+          <TextArea editable={false} w={'90%'} h={'60'}>
+            Test
           </TextArea>
         </Box>
         <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>
           경유지
         </Text>
         <Box w={'100%'} alignItems={'center'}>
-          <TextArea editable={false} w={'90%'} h={'50'}>
-            {/*axios get 경유지 주소*/}
+          <TextArea editable={false} w={'90%'} h={'60'}>
+            <Text>3428 Sinseon-ro, Nam-gu, Busan, South Korea 동명대학교</Text>{/*axios get 경유지 주소*/}
           </TextArea>
         </Box>
         <Text paddingLeft={5} paddingTop={10} paddingBottom={3}>
           도착지
         </Text>
         <Box w={'100%'} alignItems={'center'}>
-          <TextArea editable={false} w={'90%'} h={'50'}>
-            {/*axios get 도착지 주소*/}
+          <TextArea editable={false} w={'90%'} h={'60'}>
+            <Text>309 Suyeong-ro, Nam-gu, Busan, South Korea 경성대학교</Text>{/*axios get 도착지 주소*/}
           </TextArea>
         </Box>
         <Text paddingLeft={5} paddingTop={10}>
@@ -200,8 +233,8 @@ const Working=({navigation})=>{
               <Box>
                 <HStack p={3} justifyContent={'space-between'} space={5}>
                   <VStack>
-                    <Text fontSize={'xl'}>{name}</Text>
-                    <Text>30대 남</Text>
+                    <Text fontSize={'xl'}>Test 핼퍼님</Text>
+
                   </VStack>
                   <VStack>
                     <Text>여기에 별점 넣기</Text>
@@ -219,16 +252,16 @@ const Working=({navigation})=>{
           space={'25%'}
           paddingX={5}
           paddingY={10}>
-          <Button w={'24%'} bg={'#0066ff'}>
+          <NBButton w={'24%'} bg={'#0066ff'}>
             <Text color={'#fff'} bold>
               전화하기
             </Text>
-          </Button>
-          <Button w={'26%'} bg={'#0066ff'} onPress={getAPI}>
+          </NBButton>
+          <NBButton w={'26%'} bg={'#0066ff'} >
             <Text color={'#fff'} bold>
               헬퍼톡하기
             </Text>
-          </Button>
+          </NBButton>
         </HStack>
       </ScrollView>
     </NativeBaseProvider>

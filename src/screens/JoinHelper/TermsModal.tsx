@@ -2,9 +2,13 @@
 import React, {useState} from "react";
 import {Alert, Modal, View, StyleSheet, Text, Pressable} from "react-native";
 import {NativeBaseProvider, Checkbox, HStack} from "native-base";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { JoinHelperStackParamList } from "../../types/navigation";
+import { useNavigation } from "@react-navigation/native";
 
 const TermsModal = () =>{
     const [modalVisible, setModalVisible] = useState(false);
+    const navigation = useNavigation();
 
     return (
         <NativeBaseProvider>
@@ -35,7 +39,7 @@ const TermsModal = () =>{
                                 </View>
                             <Pressable
                                 style={styles.button}
-                                onPress={() => setModalVisible(!modalVisible)}>
+                                onPress={() => navigation.replace('Home')}>
                                 <Text style={styles.textStyle}>동의 하고 시작하기</Text>
                             </Pressable>
                         </View>

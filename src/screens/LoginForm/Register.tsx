@@ -23,7 +23,7 @@ interface userData {
     nickname: string;
     gender: string;
 }
-const Register = ({route}:NativeStackScreenProps<LoginStackParamList>) => {
+const Register = ({navigation,route}:NativeStackScreenProps<LoginStackParamList>) => {
     const {ad} = route.params;
 
 
@@ -78,6 +78,7 @@ const Register = ({route}:NativeStackScreenProps<LoginStackParamList>) => {
           .then(response => {
               // 요청이 성공한 경우에 수행할 동작
               console.log('요청이 성공하였습니다.', response.data);
+              navigation.replace('Login');
           })
           .catch(error => {
               // 요청이 실패한 경우에 수행할 동작

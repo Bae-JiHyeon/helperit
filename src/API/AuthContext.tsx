@@ -2,6 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import React, {createContext, useEffect, useState} from 'react';
 import {BASE_URL} from '../config';
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { LoginStackParamList } from "../types/navigation";
 
 type AuthContextType = {
   register: (name: string, email: string, password: string) => void;
@@ -11,7 +13,7 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);;
 
 export const AuthProvider = ({children}) => {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({ });
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
 
@@ -76,27 +78,31 @@ export const AuthProvider = ({children}) => {
     return JSON.parse(JSON.stringify(obj, replacer));
   }
 
-  const logout = () => {
+  const logout = ({ navigation }:NativeStackScreenProps<LoginStackParamList>) => {
     const apiurl = 'http://10.0.2.2:8000/accounts/logout/'
+    AsyncStorage.removeItem("userInfo");
+    AsyncStorage.clear();
 
-    axios
-      .post(
-        apiurl,
-        {},
-        {
-          headers: {Authorization: `Bearer ${userInfo.token}`},
-        },
-      )
-      .then((res) => {
-        console.log(res.data);
-        AsyncStorage.removeItem('userInfo');
-        setUserInfo({});
-      })
-      .catch(e => {
-        AsyncStorage.removeItem('userInfo');
-        AsyncStorage.clear();
-        console.log(`logout error ${e}`);
-      });
+    {/*
+      axios
+        .post(
+          apiurl,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` }
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          AsyncStorage.removeItem("userInfo");
+          setUserInfo({});
+        })
+        .catch(e => {
+          AsyncStorage.removeItem("userInfo");
+          AsyncStorage.clear();
+          console.log(`logout error ${e}`);
+        });
+    */}
   };
 
   const isLoggedIn = async () => {

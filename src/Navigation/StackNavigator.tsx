@@ -13,6 +13,9 @@ import Terms from "../screens/LoginForm/Terms";
 import ForgotPassword from "../screens/LoginForm/ForgotPassword";
 import React, { useContext } from "react";
 import {AuthContext} from "../API/AuthContext";
+import JoinHelperStack from "../screens/JoinHelper/JoinHelperStack";
+import PrimaryInfo from "../screens/JoinHelper/PrimaryInfo";
+import Working from "../screens/Job/Working";
 
 const Stack = createStackNavigator();
 
@@ -27,7 +30,9 @@ const StackNavigator = () => {
               <Stack.Screen options={{headerTitle: '일거리 요청'}} name="RequestPage" component={RequestPage} />
               <Stack.Screen name="RequestDetail" component={RequestDetail} options={{headerTitle: ''}} />
               <Stack.Screen name="JobScreen" component={JobScreen}/>
-              <Stack.Screen name="JobSelect" component={JobSelect} />
+              <Stack.Screen name="JobSelect" options={{headerTitle: '일거리 선택', headerShown: true}} component={JobSelect} />
+              <Stack.Screen name="JoinHelper" options={{headerTitle: '', headerShown: false}} component={JoinHelperStack}/>
+              <Stack.Screen name="Working" options={{headerTitle: '수행', headerShown: true}}component={Working}/>
             </>
             ) : (
               <>
@@ -37,7 +42,6 @@ const StackNavigator = () => {
               <Stack.Screen name='Register' component={Register} options={{ title: '회원 가입' }}/>
               </>
             )}
-
         </Stack.Navigator>
     );
 };

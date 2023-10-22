@@ -163,14 +163,12 @@ const JobSelect=({navigation, route})=>{
                             <Box>
                                 <HStack p={3} justifyContent={'space-between'} space={5}>
                                     <VStack>
-                                        <Text fontSize={'xl'}>김헬퍼 헬퍼님</Text>
-                                        <Text>30대 남</Text>
+                                        <Text fontSize={'xl'}>Test 헬퍼님</Text>
+
                                     </VStack>
                                     <VStack>
                                         <Text>여기에 별점 넣기</Text>
-                                        <Text fontSize={'xs'} color={'coolGray.500'}>
-                                            수행 횟수 15건
-                                        </Text>
+
                                     </VStack>
                                 </HStack>
                             </Box>

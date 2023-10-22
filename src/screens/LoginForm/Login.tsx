@@ -63,7 +63,7 @@ const Login = ({navigation}:NativeStackScreenProps<LoginStackParamList>) => {
             <View style={styles.otherButtonContainer}>
                 <Button
                   title="로그인"
-                  style={styles.buttonLogin}
+                  color='#34BEBA'
                   onPress={() => {
                       login(email, password);
                   }}

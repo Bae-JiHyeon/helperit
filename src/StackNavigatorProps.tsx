@@ -4,6 +4,7 @@ type RootStackParamList = {
     WorkRequestTab: undefined;
     RequestTutorial: undefined;
     RequestPage: undefined;
+    Working: undefined;
 };
 
 export type WorkRequestTabNavigationProp = StackNavigationProp<

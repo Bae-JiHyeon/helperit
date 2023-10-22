@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useRef, useState } from "react";
 import {
     ScrollView,
     Text,
@@ -12,9 +12,21 @@ import Home_FindTalent from './Home_FindTalent';
 import Home_RequestRealTime from './Home_RequestRealTime';
 import Home_Suggestions from './Home_Suggestions';
 import Slider from '../Components/Slider';
+import PopupModal from "../Components/HelperModal";
 const WorkRequestTab = ({navigation}) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const {width: windowWidth} = useWindowDimensions();
+
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+    const openPopup = () => {
+        setIsPopupVisible(true);
+    };
+
+    const closePopup = () => {
+        setIsPopupVisible(false);
+    };
+
 
     return (
         <ScrollView style={{flex: 1}}>
@@ -53,6 +65,7 @@ const WorkRequestTab = ({navigation}) => {
             <Home_RequestRealTime />
             <Divider thickness="10" />
             <Home_Suggestions />
+            <PopupModal isVisible={isPopupVisible} onClose={closePopup} />
         </ScrollView>
     );
 };

@@ -8,6 +8,11 @@ import Working from "./src/screens/Job/Working";
 import Test from "./src/Test";
 import LoginFormNavigator from "./src/screens/LoginForm/LoginFormNavigator";
 import { AuthProvider } from "./src/API/AuthContext";
+import TermsModal from "./src/screens/JoinHelper/TermsModal";
+import PrimaryInfoSpec from "./src/screens/JoinHelper/PrimaryInfoSpec";
+import JoinHelperStack from "./src/screens/JoinHelper/JoinHelperStack";
+import PrimaryInfo from "./src/screens/JoinHelper/PrimaryInfo";
+
 
 
 const App = () => {

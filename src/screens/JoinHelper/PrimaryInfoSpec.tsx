@@ -42,10 +42,8 @@ const PrimaryInfoSpec=({navigation}:NativeStackScreenProps<JoinHelperStackParamL
                         <Checkbox value="Trash" style={styles.checkBox}><Text>화물차</Text></Checkbox>
                         <Checkbox value="Delivery" style={styles.checkBox}><Text>도보</Text></Checkbox>
                     </HStack>
-                    <View>
-                        <Button title={'저장'} onPress={()=>{/*모달 띄우기*/}}></Button>
-                    </View>
                 </View>
+                <TermsModal/>
                 <View style={{height:65}}>
                     <View style={styles.naviBar}>
                         <Pressable onPress={()=>navigation.navigate('PrimaryInfoBank')}>
